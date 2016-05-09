@@ -32,6 +32,15 @@ h1 {
 	text-shadow: 2px 2px #000000;
 }
 
+#playerMessage h3 {
+	font-size: 2vw;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 2vw;
+}
+
 #gameSection {
 	height: 30vw;
 	width: 30vw;
