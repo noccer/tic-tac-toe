@@ -1,22 +1,34 @@
 console.log("app.js connected successfully.");
 console.log("Welcome to Nialls Tic-Tac-Toe!");
 
-var lineOne = "123";
-var lineOneArray = lineOne.split("");
-// console.log(lineOneArray);
+///set up game array
+///set up players and how they take a turn.
+///
 
-var lineTwo = "456";
-var lineTwoArray = lineTwo.split("");
-// console.log(lineTwoArray);
+var playerOne;
+var playerTwo;
 
-var lineThree = "789";
-var lineThreeArray = lineThree.split("");
-// console.log(lineTwoArray);
+var rowOneInput = ["_","_","_"];
+var rowOneValues = [1,2,4];
 
-var gameArray = [];
+var rowTwoInput = ["_","_","_"];
+var rowTwoValues = [8,16,32];
 
-gameArray.push(lineOneArray);
-gameArray.push(lineTwoArray);
-gameArray.push(lineThreeArray);
+var rowThreeInput = ["_","_","_"];
+var rowThreeValues = [64,128,256];
 
-console.table(gameArray);
+var allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput];
+
+var makeMove = function(rowNum,colNum, letter){
+	console.log(allInputsArray[rowNum][colNum]);
+	if (allInputsArray[rowNum][colNum] === "_"){
+	allInputsArray[rowNum].splice(colNum,1,letter);
+	};
+	console.table(allInputsArray);
+};
+
+makeMove(1,1,"X");
+makeMove(0,0,"O");
+makeMove(1,1,"X");
+makeMove(1,1,"X");
+makeMove(1,1,"X");
