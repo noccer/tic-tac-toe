@@ -1,7 +1,54 @@
 * {
 	border: 1px solid black;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
 }
 
 html {
 	background-color: #99ccee;
+	font-family: 'Permanent Marker', cursive;
+}
+
+#header {
+	background-color: #288bb9;
+	width: 100%;
+	margin: 0 auto;
+	height: 7vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 4vw;
+	border-radius: 0 0 2vw 2vw;
+}
+
+h1 {
+	color: #ffffff;
+	font-size: 5vw;
+	padding: 5px;
+	text-shadow: 2px 2px #000000;
+}
+
+#gameSection {
+	height: 30vw;
+	width: 30vw;
+	display: block;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.row {
+	width: 100%;
+	height: 10vw;
+	box-sizing: border-box;
+}
+
+.col {
+	height: 10vw;
+	width: 33.3%;
+	display: inline-block;
+	box-sizing: border-box;
 }
