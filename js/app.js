@@ -5,16 +5,28 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 ///set up players and how they take a turn.
 ///
 
-var playerOne = ["Player 1", 0]; ///name and score
-var playerTwo = ["Player 2", 0]; ///name and score
+var gridSize = 3; ///this will determine the grid size
 
-var rowOneInput = ["_","_","_"];
+var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
+var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
+
+var defaultBlankSymbol = "_";
+var defaultBlankSymbolString = "";
+var createDefaultBlankSymbolString = function(){
+	for (var i = 0; i < gridSize; i++) {
+		defaultBlankSymbolString+=defaultBlankSymbol;
+	}
+};
+createDefaultBlankSymbolString();
+
+///manually inputting rows for now, but hope to make these automatic
+var rowOneInput = defaultBlankSymbolString.split("");
 var rowOneValues = [1,2,4];
 
-var rowTwoInput = ["_","_","_"];
+var rowTwoInput = defaultBlankSymbolString.split("");
 var rowTwoValues = [8,16,32];
 
-var rowThreeInput = ["_","_","_"];
+var rowThreeInput = defaultBlankSymbolString.split("");
 var rowThreeValues = [64,128,256];
 
 var winningScores = [7,56,448,73,146,292,273,84];
@@ -23,9 +35,9 @@ var playerScoreThisRound = 0;
 var allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput];
 var allValuesArray = [rowOneValues,rowTwoValues,rowThreeValues];
 
-var playerMove = function(player, rowNum,colNum,letter){
-	if (allInputsArray[rowNum][colNum] === "_"){
-		allInputsArray[rowNum].splice(colNum,1,letter);
+var playerMove = function(player, rowNum,colNum/*,letter*/){
+	if (allInputsArray[rowNum][colNum] === defaultBlankSymbol){
+		allInputsArray[rowNum].splice(colNum,1,player[2]);
 	}
 	console.table(allInputsArray);
 	player[1] = player[1] + (allValuesArray[rowNum][colNum]);
@@ -44,13 +56,13 @@ var checkWhoWon = function(player){
 	}
 };
 
-playerMove(playerOne,0,0,"X");
-// playerMove(playerTwo,0,1,"O");
-playerMove(playerOne,0,2,"X");
+playerMove(playerOne,0,0);
+playerMove(playerTwo,0,1);
+playerMove(playerOne,0,2);
 // playerMove(playerTwo,1,0,"O");
-playerMove(playerOne,1,1,"X");
+playerMove(playerOne,1,1);
 // playerMove(playerTwo,1,2,"O");
 // playerMove(playerOne,2,0,"X");
-playerMove(playerTwo,2,2,"O");
-playerMove(playerTwo,2,1,"O");
-playerMove(playerTwo,2,0,"O");
+playerMove(playerTwo,2,2);
+playerMove(playerTwo,2,1);
+playerMove(playerTwo,2,0);
