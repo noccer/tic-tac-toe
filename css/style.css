@@ -65,3 +65,7 @@ h1 {
 .playerOneClicked {
 	background-color: #F44336;
 }
+
+.playerTwoClicked {
+	background-color: #4CAF50;
+}
