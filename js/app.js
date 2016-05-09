@@ -10,11 +10,13 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 
 var gridSize = 3; ///this will determine the grid size
 
-var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
-var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
+var playerOne = ["Player 1 RED", 0, "X"]; ///name, score & symbol
+var playerTwo = ["Player 2 GREEN", 0, "O"]; ///name, score & symbol
 
 var whoIsPlayingNow = playerOne; ///check whose turn it is
 console.log("whoIsPlayingNow = "+whoIsPlayingNow[0]);
+
+var numberOfTurns = 0; ///when this = 9, the game is over and it's possibly a draw
 
 var emptyCellSymbol = "_"; ///this is just to set a default value. I might use this value in the front end at some point.
 var emptyCellSymbolString = "";///variable length string that we split into an array later to populate the rowsInput arrays
@@ -95,23 +97,46 @@ makeGameArea();
 $('.col').on('click', function(){
 	console.log("here are the classes from your click");
 	var clickedBoxClassList = ($(this).attr("class"));///returns string of  the classes that were clicked
-	console.log(clickedBoxClassList);
+	console.log("clickedBoxClassList is "+clickedBoxClassList);
 	var clickedBoxClassListArray = clickedBoxClassList.split(""); ///split the original classes string into an array which we can now index, with index[1] being the row value, and index[3] being the column value
-	console.log(clickedBoxClassListArray);
-	var rowClicked = clickedBoxClassListArray[1];///make playerMove more readable!
-	var colClicked = clickedBoxClassListArray[3];///make playerMove more readable!
+	var checkIfDisabled = 0;
+	var checkIfDisabledFunction = function(){
+		var searchClickedBoxClassList = clickedBoxClassList.search('disableClick');
+		console.log("the value of disableClick is: "+searchClickedBoxClassList);
+		checkIfDisabled = searchClickedBoxClassList;
+	};
+	checkIfDisabledFunction();
+	console.log("checkIfDisabled value is: "+checkIfDisabled);
+	if (checkIfDisabled === (-1)){
+		console.log(clickedBoxClassList);
 
-	playerMove(whoIsPlayingNow,rowClicked,colClicked);
+		var rowClicked = clickedBoxClassListArray[1];///make playerMove more readable!
+		var colClicked = clickedBoxClassListArray[3];///make playerMove more readable!
 
-	if (whoIsPlayingNow === playerOne){
-		$(this)
-		.addClass('playerTwoClicked');
-	}
+		playerMove(whoIsPlayingNow,rowClicked,colClicked);
+
+		if (whoIsPlayingNow === playerOne){
+			$(this)
+			.addClass('playerTwoClicked disableClick');
+		}
+		else {
+			$(this)
+			.addClass('playerOneClicked disableClick');
+		}
+
+		///code to insert a message into page
+		$('#playerMessage h3').text(whoIsPlayingNow[0]+": make your move!")
+		.css({
+			'color' : 'black'
+		});///close css
+	} ///close if disableClick
 	else {
-		$(this)
-		.addClass('playerOneClicked');
-	}
-});
+		$('#playerMessage h3').text("Try again "+whoIsPlayingNow[0]+"! That box is already chosen...")
+		.css({
+			'color' : 'red',
+			});///close css
+		}///close else
+	};
 
 //////////////////////////////////
 ///SAMPLE PLAY MOVES//////////////
