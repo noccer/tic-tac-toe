@@ -75,7 +75,10 @@ var makeGameArea = function (){
 }
 makeGameArea();
 
-
+$('.col').on('click', function(){
+  $(this)
+    .css('border-color', 'red');
+});
 
 //////////////////////////////////
 ///SAMPLE PLAY MOVES//////////////

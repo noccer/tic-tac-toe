@@ -61,3 +61,7 @@ h1 {
 	display: inline-block;
 	box-sizing: border-box;
 }
+
+.playerOneClicked {
+	background-color: #F44336;
+}
