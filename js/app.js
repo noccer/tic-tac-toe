@@ -1,3 +1,6 @@
+$(function() {
+console.log( "jQuery ready!" )
+
 console.log("app.js connected successfully.");
 console.log("Welcome to Nialls Tic-Tac-Toe!");
 
@@ -66,3 +69,5 @@ playerMove(playerOne,1,1);
 playerMove(playerTwo,2,2);
 playerMove(playerTwo,2,1);
 playerMove(playerTwo,2,0);
+
+});///close the jQuery listener. $(function() means the page Document Object Model (DOM) is ready for JavaScript code to execute, images/scaffolding will load before any JavaScript does.
