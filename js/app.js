@@ -31,16 +31,20 @@ var checkWhoWon = function(player){
 	}
 };
 
-var playerOneScoreMove = function(rowNum,colNum,letter){
+var playerMove = function(player, rowNum,colNum,letter){
 	if (allInputsArray[rowNum][colNum] === "_"){
 		allInputsArray[rowNum].splice(colNum,1,letter);
 	}
 	console.table(allInputsArray);
-	playerOne[1] = playerOne[1] + (allValuesArray[rowNum][colNum]);
-	console.log(playerOne[0]+" current score is: "+playerOne[1]);
-	checkWhoWon(playerOne);
+	player[1] = player[1] + (allValuesArray[rowNum][colNum]);
+	console.log(player[0]+" current score is: "+player[1]);
+	checkWhoWon(player);
 };
 
-playerOneScoreMove(2,2,"X");
-playerOneScoreMove(1,1,"X");
-playerOneScoreMove(0,0,"X");
+playerMove(playerOne,0,0,"X");
+playerMove(playerTwo,0,1,"O");
+playerMove(playerOne,0,2,"X");
+playerMove(playerTwo,1,0,"O");
+playerMove(playerOne,1,1,"X");
+playerMove(playerTwo,1,2,"O");
+playerMove(playerOne,2,0,"X");
