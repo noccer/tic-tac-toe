@@ -77,7 +77,7 @@ makeGameArea();
 
 $('.col').on('click', function(){
   $(this)
-    .css('border-color', 'red');
+    .addClass('playerOneClicked');
 });
 
 //////////////////////////////////
@@ -86,10 +86,10 @@ $('.col').on('click', function(){
 // playerMove(playerOne,0,0);
 // playerMove(playerTwo,0,1);
 // playerMove(playerOne,0,2);
-// // playerMove(playerTwo,1,0,"O");
+// playerMove(playerTwo,1,0);
 // playerMove(playerOne,1,1);
-// // playerMove(playerTwo,1,2,"O");
-// // playerMove(playerOne,2,0,"X");
+// // playerMove(playerTwo,1,2);
+// // playerMove(playerOne,2,0);
 // playerMove(playerTwo,2,2);
 // playerMove(playerTwo,2,1);
 // playerMove(playerTwo,2,0);
