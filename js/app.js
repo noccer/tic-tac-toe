@@ -5,8 +5,8 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 ///set up players and how they take a turn.
 ///
 
-var playerOne;
-var playerTwo;
+var playerOne = 0; ///score
+var playerTwo = 0; ///score
 
 var rowOneInput = ["_","_","_"];
 var rowOneValues = [1,2,4];
@@ -17,18 +17,27 @@ var rowTwoValues = [8,16,32];
 var rowThreeInput = ["_","_","_"];
 var rowThreeValues = [64,128,256];
 
-var allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput];
+var winningScores = [7,56,448,73,146,292,273,84]
 
-var makeMove = function(rowNum,colNum, letter){
-	console.log(allInputsArray[rowNum][colNum]);
+var allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput];
+var allValuesArray = [rowOneValues,rowTwoValues,rowThreeValues];
+
+
+var playerOneMove = function(rowNum,colNum,letter){
 	if (allInputsArray[rowNum][colNum] === "_"){
-	allInputsArray[rowNum].splice(colNum,1,letter);
+		allInputsArray[rowNum].splice(colNum,1,letter);
 	};
 	console.table(allInputsArray);
+	playerOne = playerOne + (allValuesArray[rowNum][colNum]);
+	console.log(playerOne);
+	for (var i = 0; i < winningScores.length; i++) {
+		if (playerOne === winningScores[i])
+		{
+			console.log('playerOne wins!!!');
+		}
+	}
 };
 
-makeMove(1,1,"X");
-makeMove(0,0,"O");
-makeMove(1,1,"X");
-makeMove(1,1,"X");
-makeMove(1,1,"X");
+playerOneMove(2,0,"X");
+playerOneMove(1,0,"X");
+playerOneMove(0,0,"X");
