@@ -8,7 +8,7 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 ///set up players and how they take a turn.
 ///
 
-var gridSize = 4; ///this will determine the grid size
+var gridSize = 3; ///this will determine the grid size
 
 var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
 var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
@@ -23,7 +23,7 @@ var emptyCellSymbol = "_"; ///this is just to set a default value. I might use t
 var emptyCellSymbolString = "";///variable length string that we split into an array later to populate the rowsInput arrays
 var createEmptyCellSymbolString = function(){
 	for (var i = 0; i < gridSize; i++) {
-		emptyCellSymbolString+=emptyCellSymbol;
+		emptyCellSymbolString+=emptyCellSymbol;///concatenate!
 	}///close for loop
 };///close createEmptyCellSymbolString
 createEmptyCellSymbolString();
