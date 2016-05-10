@@ -111,11 +111,11 @@ var makeGameArea = function (){///generates the gaming area
 makeGameArea();///initiate the gameArea
 
 var gameOver = function(){///runs at the end of each click to see if the game is over by DRAW or by WINNER.
-	if (numberOfTurns === (gridSize*gridSize)) { ///check if the game is a draw
+	if (numberOfTurns === (gridSize*gridSize) && (winner === undefined)) { ///check if the game is a draw
 		$('#playerMessage h3').text("DRAWN GAME!")
-		.css({
-			'color' : 'green',
-			});///close css
+		$('#gameOutline').css({
+			'background-color' : '#000000'
+		});
 	}
 	else if (winner != undefined) { ///check if a winner has been found
 		$('#playerMessage h3').text("Congratulations "+winner+", you have won!")
@@ -151,13 +151,23 @@ $('.col').on('click', function(){
 
 			playerMove(whoIsPlayingNow,rowClicked,colClicked);
 
-			if (whoIsPlayingNow === playerOne){
+			if (whoIsPlayingNow === playerOne){ ///adds the css class for playerTwo
 				$(this)
 				.addClass('playerTwoClicked disableClick');
+				$(this)
+				.text(playerTwo[2]);
+				$('#gameOutline').css({
+					'background-color' : '#A5D6A7'
+				});
 			}
-			else {
+			else { ///adds the css class for playerOne
 				$(this)
 				.addClass('playerOneClicked disableClick');
+				$(this)
+				.text(playerOne[2]);
+				$('#gameOutline').css({
+					'background-color' : '#EF9A9A'
+				});
 			}
 			$('#playerMessage h4').empty();
 			$('#playerMessage h3').text(whoIsPlayingNow[0]+": make your move!")
