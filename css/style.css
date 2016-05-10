@@ -5,16 +5,16 @@
 }
 
 html, body {
-	height: 100%;
+	/*height: 100%;*/
 }
 
 html {
-	background-color: #99ccee;
+	background-color: #BBDEFB;
 	font-family: 'Permanent Marker', cursive;
 }
 
 #header {
-	background-color: #288bb9;
+	background-color: #1976D2;
 	width: 100%;
 	margin: 0 auto;
 	height: 7vw;
@@ -22,7 +22,7 @@ html {
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 4vw;
-	border-radius: 0 0 2vw 2vw;
+	box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.5);
 }
 
 h1 {
@@ -32,34 +32,48 @@ h1 {
 	text-shadow: 2px 2px #000000;
 }
 
-#playerMessage h3 {
+#playerMessage {
+	height: 8vw;
+	margin-bottom: 2vw;
+}
+
+#playerMessage h3, #playerMessage h4 {
 	font-size: 2vw;
 	padding: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 2vw;
+
 }
 
 #gameSection {
-	height: 30vw;
-	width: 30vw;
-	display: block;
 	margin: 0 auto;
 	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+#gameOutline {
+	background-color: #ffffff;
+	width: 45vw;
+	border: 1px solid grey;
+	box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
 }
 
 .row {
 	width: 100%;
-	height: 10vw;
-	box-sizing: border-box;
+	height: 15vw;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
-.col {
-	height: 10vw;
-	width: 33.3%;
-	display: inline-block;
-	box-sizing: border-box;
+div .col {
+	/*background-color: blue;*/
+	width: 9vw;
+	height: 9vw;
+	border: 1px solid black;
 }
 
 .playerOneClicked {

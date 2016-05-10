@@ -8,10 +8,10 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 ///set up players and how they take a turn.
 ///
 
-var gridSize = 3; ///this will determine the grid size
+var gridSize = 4; ///this will determine the grid size
 
-var playerOne = ["Player 1 RED", 0, "X"]; ///name, score & symbol
-var playerTwo = ["Player 2 GREEN", 0, "O"]; ///name, score & symbol
+var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
+var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
 
 var whoIsPlayingNow = playerOne; ///check whose turn it is
 console.log("whoIsPlayingNow = "+whoIsPlayingNow[0]);
@@ -86,6 +86,10 @@ var checkWhoWon = function(player){
 };///close checkWhoWon
 
 var makeGameArea = function (){///generates the gaming area
+	var welcomeBanner1 = $('<h3>').text("Welcome! Player 1, you're up first and your symbol today is: "+playerOne[2]);
+	var welcomeBanner2 = $('<h4>').addClass("welcomeBanner2").text("Player 2, you'll be next and your symbol is: "+playerTwo[2]);
+	welcomeBanner1.appendTo($('#playerMessage'));
+	welcomeBanner2.appendTo($('#playerMessage'));
 	var gameOutline = $('<div>').attr('id','gameOutline');
 	gameOutline.appendTo($('#gameSection'));
 	///make rows
@@ -112,13 +116,13 @@ var gameOver = function(){///runs at the end of each click to see if the game is
 		.css({
 			'color' : 'green',
 			});///close css
-	};
+	}
 	else if (winner != undefined) { ///check if a winner has been found
 		$('#playerMessage h3').text("Congratulations "+winner+", you have won!")
 		.css({
 			'color' : 'green',
 			});///close css
-	};
+	}
 	else {
 		console.log("from gameOver function: Game still in progress");
 	};
@@ -155,6 +159,7 @@ $('.col').on('click', function(){
 				$(this)
 				.addClass('playerOneClicked disableClick');
 			}
+			$('#playerMessage h4').empty();
 			$('#playerMessage h3').text(whoIsPlayingNow[0]+": make your move!")
 			.css({
 				'color' : 'black'
@@ -171,6 +176,17 @@ $('.col').on('click', function(){
 	};///close the "if there is a winner" if statement.
 	gameOver();
 });///close the click listener
+
+var resetFunction = function(){
+	winner = undefined;
+	playerOne[1] = 0;
+	playerTwo[1] = 0;
+	numberOfTurns = 0;
+	whoIsPlayingNow = undefined;
+	rowOneInput = emptyCellSymbolString.split("");
+	rowTwoInput = emptyCellSymbolString.split("");
+	rowThreeInput = emptyCellSymbolString.split("");
+}
 
 //////////////////////////////////
 ///SAMPLE PLAY MOVES//////////////
