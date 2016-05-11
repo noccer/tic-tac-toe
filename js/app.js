@@ -10,15 +10,12 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 
 var gridSize = 3; ///this will determine the grid size
 
-var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
-var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
-
+var playerOne = ["Player 1", 0, "P1"]; ///name, score & symbol
+var playerTwo = ["Player 2", 0, "P2"]; ///name, score & symbol
 var whoIsPlayingNow = playerOne; ///check whose turn it is
 console.log("whoIsPlayingNow = "+whoIsPlayingNow[0]);
-
 var numberOfTurns = 0; ///when this = 9, the game is over and it's possibly a draw
 var winner = undefined;
-
 var emptyCellSymbol = "_"; ///this is just to set a default value. I might use this value in the front end at some point.
 var emptyCellSymbolString = "";///variable length string that we split into an array later to populate the rowsInput arrays
 var createEmptyCellSymbolString = function(){
@@ -27,22 +24,107 @@ var createEmptyCellSymbolString = function(){
 	}///close for loop
 };///close createEmptyCellSymbolString
 createEmptyCellSymbolString();
-
 ///manually inputting rows for now, but hope to make these automatic
+var valuesArray = [1];
+var createValuesArray = function(){
+	for (var i = 1; i < (gridSize*gridSize); i++) {
+		valuesArray.push((valuesArray[i-1])*2);
+	}
+	console.log("valuesArray for a grid size of "+gridSize+" = "+valuesArray)
+}
+createValuesArray();
+
+///these are the scores that will return a winning score hit. Because each 'cell' is worth double the value of its predecessor, we can do a CHECKSUM on the results to see if somebody won.
+///I generated these values from an Excel sheet, refer to resources/calculate_winningScores.xlsx
+var winningScores = [1057,2114,4228,8456,16912,33824,67648,135296,270592,541184,1082368,2164736,4329472,8658944,17317888,7,224,7168,229376,7340032,14,448,14336,458752,14680064,28,896,28672,917504,29360128,4161,8322,16644,133152,266304,532608,4260864,8521728,17043456,1092,2184,4368,34944,69888,139776,2236416,4472832];
+
+var sortWinningScores = function(a,b) {
+    return a - b;
+}
+winningScores.sort(sortWinningScores);
+console.log(winningScores);
+
 var rowOneInput = emptyCellSymbolString.split("");///make an array from emptyCellSymbolString >>> if gridSize is 3, rowOneInput => ['_','_','_']
-var rowOneValues = [1,2,4];
-
 var rowTwoInput = emptyCellSymbolString.split("");
-var rowTwoValues = [8,16,32];
-
 var rowThreeInput = emptyCellSymbolString.split("");
-var rowThreeValues = [64,128,256];
+var rowFourInput = emptyCellSymbolString.split("");
+var rowFiveInput = emptyCellSymbolString.split("");
 
-var winningScores = [7,56,448,73,146,292,273,84];///these are the scores that will return a winning score hit. Because each 'cell' is worth double the value of its predecessor, we can do a CHECKSUM on the results to see if somebody won.
+var rowOneValues = [];
+var rowTwoValues = [];
+
+var createRowValues = function(){
+	rowOneValues = [1];
+	var pushRow = function(whichRow){
+		for (var i = 0; i < (gridSize-1); i++) {
+			whichRow.push((whichRow[i]*2))
+		};
+	};
+	pushRow(rowOneValues);
+	console.log(rowOneValues);
+	// var addendRow = function(previous, current){ ///WONT WORK, trying to DRY
+	// 	console.log("previous = "+previous);
+	// 	console.log("current = "+current);
+	// 	current = [previous[(previous.length-1)]*2];
+	// 	console.log("addend row function has run");
+	// };
+	// addendRow(rowOneValues,rowTwoValues);
+	rowTwoValues = [rowOneValues[(gridSize-1)]*2];
+	pushRow(rowTwoValues);
+	console.log(rowTwoValues);
+
+	rowThreeValues = [rowTwoValues[(gridSize-1)]*2];
+	pushRow(rowThreeValues);
+	console.log(rowThreeValues);
+
+	rowFourValues = [rowThreeValues[(gridSize-1)]*2];
+	pushRow(rowFourValues);
+	console.log(rowFourValues);
+
+	rowFiveValues = [rowFourValues[(gridSize-1)]*2];
+	pushRow(rowFiveValues);
+	console.log(rowFiveValues);
+
+	// rowTwoValues = [rowOneValues[(rowOneValues.length-1)]*2];
+	// console.log(rowTwoValues);
+	// for (var i = 0; i < gridSize; i++) {
+	// 	rowTwoValues.push((rowTwoValues[i]*2))
+	// }
+	// console.log(rowTwoValues);
+}
+createRowValues();
+
+
+
+// var createRowTwoValues = function(){
+// 	console.log("winningScores log before rowOneValues loop: "+winningScores);
+// 	for (var i = gridSize; i < (gridSize*2); i++) {
+// 		rowTwoValues.push(winningScores[i])
+// 	}
+// 	console.log(rowTwoValues);
+// }
+// createRowTwoValues();
+
 var playerScoreThisRound = 0;
 
-var allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput]; ///nest array
-var allValuesArray = [rowOneValues,rowTwoValues,rowThreeValues]; ///nest array
+var allInputsArray = []; ///nest array
+
+var allValuesArray = [];
+var createValuesAndInputsArrays = function(){
+	if (gridSize === 3){
+		allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput];
+		allValuesArray = [rowOneValues,rowTwoValues,rowThreeValues];
+	} else if (gridSize === 4) {
+		allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput,rowFourInput];
+		allValuesArray = [rowOneValues,rowTwoValues,rowThreeValues,rowFourValues];
+	} else {
+		allInputsArray = [rowOneInput,rowTwoInput,rowThreeInput,rowFourInput,rowFiveInput];
+		allValuesArray = [rowOneValues,rowTwoValues,rowThreeValues,rowFourValues,rowFiveValues];
+	}
+	console.table(allInputsArray);
+	console.table(allValuesArray);
+}
+createValuesAndInputsArrays(); ///Creates both nested arrays.
 
 ///this function is the main game engine.
 ///HOW IT WORKS:
@@ -85,11 +167,15 @@ var checkWhoWon = function(player){
 	}///close for loop
 };///close checkWhoWon
 
-var makeGameArea = function (){///generates the gaming area
+var welcomeMessages = function(){
 	var welcomeBanner1 = $('<h3>').text("Welcome! Player 1, you're up first and your symbol today is: "+playerOne[2]);
 	var welcomeBanner2 = $('<h4>').addClass("welcomeBanner2").text("Player 2, you'll be next and your symbol is: "+playerTwo[2]);
 	welcomeBanner1.appendTo($('#playerMessage'));
 	welcomeBanner2.appendTo($('#playerMessage'));
+};
+
+var makeGameArea = function (){///generates the gaming area
+	welcomeMessages();
 	var gameOutline = $('<div>').attr('id','gameOutline');
 	gameOutline.appendTo($('#gameSection'));
 	///make rows
@@ -177,7 +263,7 @@ $('.col').on('click', function(){
 			numberOfTurns++; ///increase the number of turns that have been played
 			console.log("numberOfTurns so far = "+numberOfTurns);
 		} ///close if disableClick
-		else if (numberOfTurns != 9){
+		else if (numberOfTurns != (gridSize*gridSize)){
 			$('#playerMessage h3').text("Try again "+whoIsPlayingNow[0]+"! That box is already chosen...")
 			.css({
 				'color' : 'red',
@@ -187,16 +273,29 @@ $('.col').on('click', function(){
 	gameOver();
 });///close the click listener
 
-var resetFunction = function(){
+var resetRound = function(){
+	///reset variables
 	winner = undefined;
 	playerOne[1] = 0;
 	playerTwo[1] = 0;
 	numberOfTurns = 0;
-	whoIsPlayingNow = undefined;
+	whoIsPlayingNow = playerOne;
+	winner = undefined;
 	rowOneInput = emptyCellSymbolString.split("");
 	rowTwoInput = emptyCellSymbolString.split("");
 	rowThreeInput = emptyCellSymbolString.split("");
-}
+	playerScoreThisRound = 0;
+	///reset css
+	$('body').css({
+		'background-color' : 'chartreuse',
+	});
+	console.log(allInputsArray);
+	console.log("resetRound has been run");
+};
+
+$('#resetButton').on('click', function(){
+	resetRound();
+});
 
 //////////////////////////////////
 ///SAMPLE PLAY MOVES//////////////
