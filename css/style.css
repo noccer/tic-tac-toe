@@ -80,7 +80,7 @@ h1 {
 	transition: all 1s ease-in-out !important;
 }*/
 
-.row {
+.rowz {
 	/*width: 100%;*/
 	/*height: 10em;*/
 	/*max-width: 75vw;*/
@@ -91,7 +91,7 @@ h1 {
 	text-shadow: 2px 2px #000000;
 }
 
-div .col {
+div .colz {
 	background-color: #eeeeee;
 	min-width: 10vh;
 	max-width: 15vh;

@@ -213,12 +213,14 @@ var welcomeMessages = function(){
 
 var makeGameArea = function (){///generates the gaming area
 	welcomeMessages();
-	var gameOutline = $('<div>').attr('id','gameOutline');
+	var gameOutline = $('<div>')
+	.attr('id','gameOutline')
+	.addClass('col-md-6');
 	gameOutline.appendTo($('#gameSection'));
 	///make rows
 	for (var i = 0; i < gridSize; i++) {
 		var rows = $('<div>')
-		.addClass('row '+'row'+(i));//add row classes
+		.addClass('rowz '+'row'+(i));//add row classes
 		rows.appendTo($('#gameOutline'));///pass into webpage
 		///make columns
 		for (var j = 0; j < gridSize; j++) {
@@ -226,12 +228,16 @@ var makeGameArea = function (){///generates the gaming area
 			///KEY STEP: give columns unique identifiers!
 			///Format: rowNumberColNumber, shortened to r#c#
 			///this will be split into an array later on and used to detect which column/row the click was upon. This makes the game scaleable.
-			.addClass(('r'+(i))+'c'+(j)+' col enableClick');
-			cols.appendTo($('.row'+(i))); ///apply
+			.addClass(('r'+(i))+'c'+(j)+' colz enableClick');
+			cols.appendTo($('.rowz'+(i))); ///apply
 		}///close 'j' for loop
 	}///close 'i' for loop
 };///close makeGameArea
 makeGameArea();///initiate the gameArea
+
+var makeSidePanel = function(){
+	///TO BE COMPLETED
+}
 
 var gameOver = function(){///runs at the end of each click to see if the game is over by DRAW or by WINNER.
 	if (numberOfTurns === (gridSize*gridSize) && (winner === undefined)) { ///check if the game is a draw
@@ -286,7 +292,7 @@ var gameOver = function(){///runs at the end of each click to see if the game is
 	};
 };///close gameOver function
 
-$('.col').on('click', function(){
+$('.colz').on('click', function(){
 	console.log("click listener intiated. winner is "+winner);
 	if (winner === undefined){///check if the game is over or not
 		console.log("here are the classes from your click");
@@ -370,7 +376,7 @@ var resetRound = function(){
 		'box-shadow' : '',
 		'border' : ''
 	});
-	$('.col')
+	$('.colz')
 	.removeClass('playerOneClicked playerTwoClicked disableClick')
 	.addClass('enableClick')
 	.text("")
