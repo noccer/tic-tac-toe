@@ -8,9 +8,10 @@ console.log("Welcome to Nialls Tic-Tac-Toe!");
 ///set up players and how they take a turn.
 ///
 
-var gridSize = 3; ///this will determine the grid size
+var gridSize = 5; ///this will determine the grid size
+var consecutiveTiles = 4;///I may use this to build a
 
-var playerOne = ["Player 1", 0, "P1"]; ///name, score & symbol
+var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
 var playerTwo = ["Player 2", 0, "P2"]; ///name, score & symbol
 var whoIsPlayingNow = playerOne; ///check whose turn it is
 console.log("whoIsPlayingNow = "+whoIsPlayingNow[0]);
@@ -36,7 +37,35 @@ createValuesArray();
 
 ///these are the scores that will return a winning score hit. Because each 'cell' is worth double the value of its predecessor, we can do a CHECKSUM on the results to see if somebody won.
 ///I generated these values from an Excel sheet, refer to resources/calculate_winningScores.xlsx
-var winningScores = [1057,2114,4228,8456,16912,33824,67648,135296,270592,541184,1082368,2164736,4329472,8658944,17317888,7,224,7168,229376,7340032,14,448,14336,458752,14680064,28,896,28672,917504,29360128,4161,8322,16644,133152,266304,532608,4260864,8521728,17043456,1092,2184,4368,34944,69888,139776,2236416,4472832];
+var winningScoresG3L3 = [273,84,73,146,292,7,56,448]
+var winningScoresG4L3 = [273,546,1092,2184,4368,8736,17472,34944,7,14,112,224,1792,3584,28672,57344];
+var winningScoresG4L4 = [33825,4680,4369,8738,17476,34952,15,240,3840,61440];
+var winningScoresG5L3 = [1057,2114,4228,8456,16912,33824,67648,135296,270592,541184,1082368,2164736,4329472,8658944,17317888,7,224,7168,229376,7340032,14,448,14336,458752,14680064,28,896,28672,917504,29360128,4161,8322,16644,133152,266304,532608,4260864,8521728,17043456,1092,2184,4368,34944,69888,139776,2236416,4472832];
+var winningScoresG5L4 = [266305,532610,8521760,17043520,34952,69904,1118464,2236928,33825,67650,135300,270600,541200,1082400,2164800,4329600,8659200,17318400,15,30,480,960,15360,30720,491520,983040,15728640,31457280];
+var winningScoresG5L5 = [17043521,1118480,1082401,2164802,4329604,8659208,17318416,31,992,31744,1015808,32505856];
+
+var populateWinningScores = function (){
+	if (gridSize === 3){
+		winningScores = winningScoresG3L3;
+	} else if (gridSize === 4){
+		if (consecutiveTiles === 4){
+			winningScores = winningScoresG4L3;
+		} else {
+			winningScores = winningScoresG4L4;
+		}
+	} else {
+		if (consecutiveTiles === 3) {
+			winningScores = winningScoresG5L3;
+		}
+		else if (consecutiveTiles === 4) {
+			winningScores = winningScoresG5L4;
+		}
+		else {
+			winningScores = winningScoresG5L5;
+		}
+	};
+};
+populateWinningScores();
 
 var sortWinningScores = function(a,b) {
     return a - b;
@@ -57,7 +86,7 @@ var createRowValues = function(){
 	rowOneValues = [1];
 	var pushRow = function(whichRow){
 		for (var i = 0; i < (gridSize-1); i++) {
-			whichRow.push((whichRow[i]*2))
+			whichRow.push((whichRow[i]*0.5))
 		};
 	};
 	pushRow(rowOneValues);
@@ -84,13 +113,6 @@ var createRowValues = function(){
 	rowFiveValues = [rowFourValues[(gridSize-1)]*2];
 	pushRow(rowFiveValues);
 	console.log(rowFiveValues);
-
-	// rowTwoValues = [rowOneValues[(rowOneValues.length-1)]*2];
-	// console.log(rowTwoValues);
-	// for (var i = 0; i < gridSize; i++) {
-	// 	rowTwoValues.push((rowTwoValues[i]*2))
-	// }
-	// console.log(rowTwoValues);
 }
 createRowValues();
 
@@ -157,12 +179,17 @@ var checkWhoWon = function(player){
 		///THIS IS A KEY FUNCTION.
 		///the following if statement checks to see if the player score to date has a component of winningScores[i] in it. this is achieved using the '&' /'AND' symbol.
 		///See "JavaScript Bitwise Operators" on http://www.w3schools.com/jsref/jsref_operators.asp for more information about this
+		console.log("checking winning scores for loop no."+i);
+		console.log("player[1]score = "+player[1]);
+		console.log("player[1]score in binary = "+player[1].toString(2));
+		console.log("winningScores[i] = "+winningScores[i]);
+		console.log("winningScores[i] in binary = "+winningScores[i].toString(2));
 		if ((player[1] & winningScores[i]) === winningScores[i])
 		{
 			console.log(player[0]+" won!");
 			winner = player[0];
-			console.log("winner = "+winner);
-		}
+			console.log("WE HAVE A WINNER: WINNER = "+winner);
+		};
 		playerScoreThisRound = 0;
 	}///close for loop
 };///close checkWhoWon
