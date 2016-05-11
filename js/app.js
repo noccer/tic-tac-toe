@@ -347,6 +347,13 @@ $(function() {
         gameOver();
     }); ///close the click listener
 
+    // ___                _     ______
+    // |  __ \              | |   |  ____|
+    // | |__) |___  ___  ___| |_  | |__ _ __
+    // |  _  // _ \/ __|/ _ \ __| |  __| '_ \
+    // | | \ \  __/\__ \  __/ |_  | |  | | | |_
+    // |_|  \_\___||___/\___|\__| |_|  |_| |_(_)
+    //
     var resetRound = function() {
         ///reset variables
         winner = undefined;
@@ -389,5 +396,14 @@ $(function() {
     $('#resetButton').on('click', function() {
         resetRound();
     });
+
+    // ___           _             _              _ _
+    // |  __ \         | |           | |       /\   | | |
+    // | |__) |___  ___| |_ __ _ _ __| |_     /  \  | | |
+    // |  _  // _ \/ __| __/ _` | '__| __|   / /\ \ | | |
+    // | | \ \  __/\__ \ || (_| | |  | |_   / ____ \| | |
+    // |_|  \_\___||___/\__\__,_|_|   \__| /_/    \_\_|_|
+    //
+    //
 
 }); ///close the jQuery listener. $(function() means the page Document Object Model (DOM) is ready for JavaScript code to execute, images/scaffolding will load before any JavaScript does.
