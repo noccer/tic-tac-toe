@@ -152,7 +152,6 @@ var playerScoreThisRound = 0;
 ///this function is the main game engine.
 ///HOW IT WORKS:
 ///there are 2 sets of arrays: input arrays, and cell value arrays. When a user selects a cell, the value of that cell is pulled out and added to their comulative score. When a player score matches one of the winning combinations i.e. 3 in a row in any of these directions: horiz - vert | or either diagonal / \ ...
-
 var playerMove = function(player,rowNum,colNum){ ///update arguments
 	if (allInputsArray[rowNum][colNum] === emptyCellSymbol){///checks allInputs array to see if a move has been made already. If no move has been made, the 'empty' cell will contain emptyCellSymbol
 		allInputsArray[rowNum].splice(colNum,1,player[2]);///updates the allInputsArray to contain the players marker rather than emptyCellSymbol
@@ -209,7 +208,7 @@ var welcomeMessages = function(){
 	var welcomeBanner1 = $('<h3>').text("Welcome! "+playerOne[0]+" ("+playerOne[2]+") you're up first.");
 	// var welcomeBanner2 = $('<h4>').addClass("welcomeBanner2").text(playerTwo[0]+" ("+playerTwo[2]+") hang tight, you're next!");
 	welcomeBanner1.appendTo($('#playerMessage'));
-	welcomeBanner2.appendTo($('#playerMessage'));
+	// welcomeBanner2.appendTo($('#playerMessage'));
 };
 
 var makeGameArea = function (){///generates the gaming area
