@@ -229,7 +229,7 @@ var makeGameArea = function (){///generates the gaming area
 			///Format: rowNumberColNumber, shortened to r#c#
 			///this will be split into an array later on and used to detect which column/row the click was upon. This makes the game scaleable.
 			.addClass(('r'+(i))+'c'+(j)+' colz enableClick');
-			cols.appendTo($('.rowz'+(i))); ///apply
+			cols.appendTo($('.row'+(i))); ///apply
 		}///close 'j' for loop
 	}///close 'i' for loop
 };///close makeGameArea
