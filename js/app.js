@@ -1,5 +1,5 @@
 $(function() {
-console.log( "jQuery ready!" )
+console.log( "jQuery ready!" );
 
 console.log("app.js connected successfully.");
 console.log("Welcome to Nialls Tic-Tac-Toe!");
@@ -19,7 +19,7 @@ var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
 var whoIsPlayingNow = playerOne; ///check whose turn it is
 console.log("whoIsPlayingNow = "+whoIsPlayingNow[0]);
 var numberOfTurns = 0; ///when this = 9, the game is over and it's possibly a draw
-var winner = undefined;
+var winner;
 var emptyCellSymbol = "_"; ///this is just to set a default value. I might use this value in the front end at some point.
 var emptyCellSymbolString = "";///variable length string that we split into an array later to populate the rowsInput arrays
 var createEmptyCellSymbolString = function(){
@@ -34,13 +34,13 @@ var createValuesArray = function(){
 	for (var i = 1; i < (gridSize*gridSize); i++) {
 		valuesArray.push((valuesArray[i-1])*2);
 	}
-	console.log("valuesArray for a grid size of "+gridSize+" = "+valuesArray)
-}
+	console.log("valuesArray for a grid size of "+gridSize+" = "+valuesArray);
+};
 createValuesArray();
 
 ///these are the scores that will return a winning score hit. Because each 'cell' is worth double the value of its predecessor, we can do a CHECKSUM on the results to see if somebody won.
 ///I generated these values from an Excel sheet, refer to resources/calculate_winningScores.xlsx
-var winningScoresG3L3 = [273,84,73,146,292,7,56,448]
+var winningScoresG3L3 = [273,84,73,146,292,7,56,448];
 var winningScoresG4L3 = [273,546,1092,2184,4368,8736,17472,34944,7,14,112,224,1792,3584,28672,57344];
 var winningScoresG4L4 = [33825,4680,4369,8738,17476,34952,15,240,3840,61440];
 var winningScoresG5L3 = [1057,2114,4228,8456,16912,33824,67648,135296,270592,541184,1082368,2164736,4329472,8658944,17317888,7,224,7168,229376,7340032,14,448,14336,458752,14680064,28,896,28672,917504,29360128,4161,8322,16644,133152,266304,532608,4260864,8521728,17043456,1092,2184,4368,34944,69888,139776,2236416,4472832];
@@ -66,13 +66,13 @@ var populateWinningScores = function (){
 		else {
 			winningScores = winningScoresG5L5;
 		}
-	};
+	}
 };
 populateWinningScores();
 
 var sortWinningScores = function(a,b) {
     return a - b;
-}
+};
 winningScores.sort(sortWinningScores);
 console.log(winningScores);
 
@@ -89,8 +89,8 @@ var createRowValues = function(){
 	rowOneValues = [1];
 	var pushRow = function(whichRow){
 		for (var i = 0; i < (gridSize-1); i++) {
-			whichRow.push((whichRow[i]*2))
-		};
+			whichRow.push((whichRow[i]*2));
+		}
 	};
 	pushRow(rowOneValues);
 	console.log(rowOneValues);
@@ -116,7 +116,7 @@ var createRowValues = function(){
 	rowFiveValues = [rowFourValues[(gridSize-1)]*2];
 	pushRow(rowFiveValues);
 	console.log(rowFiveValues);
-}
+};
 createRowValues();
 
 var allInputsArray = []; ///nest array
@@ -135,7 +135,7 @@ var createValuesAndInputsArrays = function(){
 	}
 	console.table(allInputsArray);
 	console.table(allValuesArray);
-}
+};
 createValuesAndInputsArrays(); ///Creates both nested arrays.
 
 // _____                      _____  _
@@ -191,7 +191,7 @@ var checkWhoWon = function(player){
 			console.log(player[0]+" won!");
 			winner = player[0];
 			console.log("WE HAVE A WINNER: WINNER = "+winner);
-		};
+		}
 		playerScoreThisRound = 0;
 	}///close for loop
 };///close checkWhoWon
@@ -215,7 +215,8 @@ var makeGameArea = function (){///generates the gaming area
 	welcomeMessages();
 	var gameOutline = $('<div>')
 	.attr('id','gameOutline')
-	.addClass('col-md-6');
+	// .addClass('col-md-6')
+	;
 	gameOutline.appendTo($('#gameSection'));
 	///make rows
 	for (var i = 0; i < gridSize; i++) {
@@ -237,22 +238,22 @@ makeGameArea();///initiate the gameArea
 
 var makeSidePanel = function(){
 	///TO BE COMPLETED
-}
+};
 
 var gameOver = function(){///runs at the end of each click to see if the game is over by DRAW or by WINNER.
 	if (numberOfTurns === (gridSize*gridSize) && (winner === undefined)) { ///check if the game is a draw
-		$('#playerMessage h3').text("DRAWN GAME!")
+		$('#playerMessage h3').text("DRAWN GAME!");
 		$('#gameOutline').css({
 			'background-color' : '#EEEEEE',
 			'border' : 'none',
 			'box-shadow' : '0 0 0 0 rgba(0,0,0,0.0)'
-		})
+		});
 		$('body').css({
 			'background-color' : '#EEEEEE'
 		});
 	}
-	else if (winner != undefined) { ///check if a winner has been found
-		$('#playerMessage h3').text("Congratulations "+winner+", you have won!")
+	else if (winner !== undefined) { ///check if a winner has been found
+		$('#playerMessage h3').text("Congratulations "+winner+", you have won!");
 		if (winner === playerOne[0]){
 			$('body')
 			.css({
@@ -289,7 +290,7 @@ var gameOver = function(){///runs at the end of each click to see if the game is
 	}
 	else {
 		console.log("from gameOver function: Game still in progress");
-	};
+	}
 };///close gameOver function
 
 $('.colz').on('click', function(){
@@ -348,8 +349,8 @@ $('.colz').on('click', function(){
 			.css({
 				'color' : 'red',
 			});///close css
-		};///close elseif
-	};///close the "if there is a winner" if statement.
+		}///close elseif
+	}///close the "if there is a winner" if statement.
 	gameOver();
 });///close the click listener
 
