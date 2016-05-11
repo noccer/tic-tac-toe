@@ -1,164 +1,136 @@
 * {
-	/*border: 1px solid black;*/
-	margin: 0;
-	padding: 0;
+    /*border: 1px solid black;*/
+    margin: 0;
+    padding: 0;
 }
-
 html, body {
-	height: 100vh;
+    height: 100vh;
 }
-
 body {
-	transition: background-color 1s ease-in-out;
+    transition: background-color 1s ease-in-out;
 }
-
 html {
-	background-color: #BBDEFB;
-	font-family: 'Roboto Slab', sans-serif;
+    background-color: #BBDEFB;
+    font-family: 'Roboto Slab', sans-serif;
 }
-
 #header {
-	font-family: 'Permanent Marker', sans-serif;
-	background-color: #1976D2;
-	width: 100%;
-	margin: 0 auto;
-	height: 7vw;
-	min-height: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 3vh;
-	box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.5);
+    font-family: 'Permanent Marker', sans-serif;
+    background-color: #1976D2;
+    width: 100%;
+    margin: 0 auto;
+    height: 7vw;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3vh;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
 }
-
 h1 {
-	color: #ffffff;
-	font-size: 5vh;
-	padding: 5px;
-	text-shadow: 3px 3px #000000;
-	/*transition: all 1s ease-in-out;*/
+    color: #ffffff;
+    font-size: 5vh;
+    padding: 5px;
+    text-shadow: 3px 3px #000000;
+    /*transition: all 1s ease-in-out;*/
 }
-
 #playerMessage {
-
-	min-height: 12vh
+    min-height: 12vh
 }
-
 #playerMessage h3, #playerMessage h4 {
-	font-size: 3vh;
-	padding: 5px;
-	text-align: center;
-	display: block;
-	margin: 0 auto;
-	width: 75vw;
-	max-width: 384px;
-
+    font-size: 3vh;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 75vw;
+    max-width: 384px;
 }
-
 #gameSection {
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	box-sizing: border-box;
-
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
 }
-
 #gameOutline {
-	background-color: #f5f5f5;
-	/*width: 75vw;*/
-	/*max-width: 384px;*/
-	border: 1px solid #9e9e9e;
-	box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.5);
-	border-radius: 5px;
+    background-color: #f5f5f5;
+    /*width: 75vw;*/
+    /*max-width: 384px;*/
+    border: 1px solid #9e9e9e;
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 }
-
-#gameOutline:hover {
-
-}
-
-/*.enableClick {
-	transition: all 1s ease-in-out !important;
-}*/
-
 .rowz {
-	/*width: 100%;*/
-	/*height: 10em;*/
-	/*max-width: 75vw;*/
-	/*max-height: 25vw;*/
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	text-shadow: 2px 2px #000000;
+    /*width: 100%;*/
+    /*height: 10em;*/
+    /*max-width: 75vw;*/
+    /*max-height: 25vw;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-shadow: 2px 2px #000000;
 }
-
 div .colz {
-	background-color: #eeeeee;
-	min-width: 10vh;
-	max-width: 15vh;
-	min-height: 10vh;
-	max-height: 15vh;
-	margin: 1.0vh;
-	border: 1px solid #9e9e9e;
-	border-radius: 5px;
-	color: #ffffff;
-	font-size: 7vh;
-	display: inline-flex;
-	justify-content: space-around;
-	align-items: center;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-	transition: all 0.2s ease-in-out;
+    background-color: #eeeeee;
+    min-width: 10vh;
+    max-width: 15vh;
+    min-height: 10vh;
+    max-height: 15vh;
+    margin: 1.0vh;
+    border: 1px solid #9e9e9e;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 7vh;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
 }
-
 div .col:hover {
-	box-shadow: 9px 9px 9px rgba(0, 0, 0, 0.5);
-	border: 1px solid black;
+    box-shadow: 9px 9px 9px rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
 }
-
 div.playerOneClicked {
-	background-color: #F44336;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    background-color: #F44336;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 div.playerOneClicked:hover {
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-	background-color: #EF9A9A;
-	border: 1px solid #9e9e9e;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    background-color: #EF9A9A;
+    border: 1px solid #9e9e9e;
 }
-
 div .playerTwoClicked {
-	background-color: #4CAF50;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5)
+    background-color: #4CAF50;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5)
 }
 div.playerTwoClicked:hover {
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-	background-color: #A5D6A7;
-	border: 1px solid #9e9e9e;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    background-color: #A5D6A7;
+    border: 1px solid #9e9e9e;
 }
-
 section a {
-	/*text-decoration: none;*/
-	color: #000000;
-	font-size: 3vh;
-	padding: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 4vh;
+    /*text-decoration: none;*/
+    color: #000000;
+    font-size: 3vh;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
 }
-
 button {
-	font-size: 3vh;
-	padding: 10px;
-	display: block;
-	margin: 0 auto;
-	margin-top: 4vh;
+    font-size: 3vh;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 4vh;
 }
-
 img {
-	position: fixed;
+    position: fixed;
     bottom: 0;
     right: 0;
-	width:50px;
-	/*max width: 15vh;*/
-	height: 50px;
-	/*min-height: 15vw;*/
+    width: 50px;
+    /*max width: 15vh;*/
+    height: 50px;
+    /*min-height: 15vw;*/
 }
