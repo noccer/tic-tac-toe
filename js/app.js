@@ -4,15 +4,18 @@ console.log( "jQuery ready!" )
 console.log("app.js connected successfully.");
 console.log("Welcome to Nialls Tic-Tac-Toe!");
 
-///set up game array
-///set up players and how they take a turn.
-///
+// __      __        _       _     _
+// \ \    / /       (_)     | |   | |
+//  \ \  / /_ _ _ __ _  __ _| |__ | | ___  ___
+//   \ \/ / _` | '__| |/ _` | '_ \| |/ _ \/ __|
+//    \  / (_| | |  | | (_| | |_) | |  __/\__ \
+// 	\/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
 
-var gridSize = 5; ///this will determine the grid size
-var consecutiveTiles = 4;///I may use this to build a
+var gridSize = 3; ///this will determine the grid size
+var consecutiveTiles = 3;///I may use this to build a
 
 var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
-var playerTwo = ["Player 2", 0, "P2"]; ///name, score & symbol
+var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
 var whoIsPlayingNow = playerOne; ///check whose turn it is
 console.log("whoIsPlayingNow = "+whoIsPlayingNow[0]);
 var numberOfTurns = 0; ///when this = 9, the game is over and it's possibly a draw
@@ -48,7 +51,7 @@ var populateWinningScores = function (){
 	if (gridSize === 3){
 		winningScores = winningScoresG3L3;
 	} else if (gridSize === 4){
-		if (consecutiveTiles === 4){
+		if (consecutiveTiles === 3){
 			winningScores = winningScoresG4L3;
 		} else {
 			winningScores = winningScoresG4L4;
@@ -86,7 +89,7 @@ var createRowValues = function(){
 	rowOneValues = [1];
 	var pushRow = function(whichRow){
 		for (var i = 0; i < (gridSize-1); i++) {
-			whichRow.push((whichRow[i]*0.5))
+			whichRow.push((whichRow[i]*2))
 		};
 	};
 	pushRow(rowOneValues);
@@ -116,19 +119,6 @@ var createRowValues = function(){
 }
 createRowValues();
 
-
-
-// var createRowTwoValues = function(){
-// 	console.log("winningScores log before rowOneValues loop: "+winningScores);
-// 	for (var i = gridSize; i < (gridSize*2); i++) {
-// 		rowTwoValues.push(winningScores[i])
-// 	}
-// 	console.log(rowTwoValues);
-// }
-// createRowTwoValues();
-
-var playerScoreThisRound = 0;
-
 var allInputsArray = []; ///nest array
 
 var allValuesArray = [];
@@ -148,9 +138,21 @@ var createValuesAndInputsArrays = function(){
 }
 createValuesAndInputsArrays(); ///Creates both nested arrays.
 
+// _____                      _____  _
+// / ____|                    |  __ \| |
+// | |  __  __ _ _ __ ___   ___| |__) | | __ _ _   _
+// | | |_ |/ _` | '_ ` _ \ / _ \  ___/| |/ _` | | | |
+// | |__| | (_| | | | | | |  __/ |    | | (_| | |_| |
+// \_____|\__,_|_| |_| |_|\___|_|    |_|\__,_|\__, |
+// 										   __/ |
+// 										  |___/
+
+var playerScoreThisRound = 0;
+
 ///this function is the main game engine.
 ///HOW IT WORKS:
 ///there are 2 sets of arrays: input arrays, and cell value arrays. When a user selects a cell, the value of that cell is pulled out and added to their comulative score. When a player score matches one of the winning combinations i.e. 3 in a row in any of these directions: horiz - vert | or either diagonal / \ ...
+
 var playerMove = function(player,rowNum,colNum){ ///update arguments
 	if (allInputsArray[rowNum][colNum] === emptyCellSymbol){///checks allInputs array to see if a move has been made already. If no move has been made, the 'empty' cell will contain emptyCellSymbol
 		allInputsArray[rowNum].splice(colNum,1,player[2]);///updates the allInputsArray to contain the players marker rather than emptyCellSymbol
@@ -178,7 +180,8 @@ var checkWhoWon = function(player){
 	for (var i = 0; i < winningScores.length; i++) {
 		///THIS IS A KEY FUNCTION.
 		///the following if statement checks to see if the player score to date has a component of winningScores[i] in it. this is achieved using the '&' /'AND' symbol.
-		///See "JavaScript Bitwise Operators" on http://www.w3schools.com/jsref/jsref_operators.asp for more information about this
+		///See "JavaScript Bitwise Operators" on http://www.w3schools.com/jsref/jsref_operators.asp for more information about this. BITWISE checking.
+		///http://www.i-programmer.info/programming/javascript/2550-javascript-bit-manipulation.html
 		console.log("checking winning scores for loop no."+i);
 		console.log("player[1]score = "+player[1]);
 		console.log("player[1]score in binary = "+player[1].toString(2));
@@ -194,9 +197,17 @@ var checkWhoWon = function(player){
 	}///close for loop
 };///close checkWhoWon
 
+// _____   ____  __  __   ______                _   _
+// |  __ \ / __ \|  \/  | |  ____|              | | (_)
+// | |  | | |  | | \  / | | |__ _   _ _ __   ___| |_ _  ___  _ __  ___
+// | |  | | |  | | |\/| | |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+// | |__| | |__| | |  | | | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+// |_____/ \____/|_|  |_| |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+//
+
 var welcomeMessages = function(){
-	var welcomeBanner1 = $('<h3>').text("Welcome! Player 1, you're up first and your symbol today is: "+playerOne[2]);
-	var welcomeBanner2 = $('<h4>').addClass("welcomeBanner2").text("Player 2, you'll be next and your symbol is: "+playerTwo[2]);
+	var welcomeBanner1 = $('<h3>').text("Welcome! "+playerOne[0]+" ("+playerOne[2]+") you're up first.");
+	// var welcomeBanner2 = $('<h4>').addClass("welcomeBanner2").text(playerTwo[0]+" ("+playerTwo[2]+") hang tight, you're next!");
 	welcomeBanner1.appendTo($('#playerMessage'));
 	welcomeBanner2.appendTo($('#playerMessage'));
 };
@@ -216,7 +227,7 @@ var makeGameArea = function (){///generates the gaming area
 			///KEY STEP: give columns unique identifiers!
 			///Format: rowNumberColNumber, shortened to r#c#
 			///this will be split into an array later on and used to detect which column/row the click was upon. This makes the game scaleable.
-			.addClass(('r'+(i))+'c'+(j)+' col');
+			.addClass(('r'+(i))+'c'+(j)+' col enableClick');
 			cols.appendTo($('.row'+(i))); ///apply
 		}///close 'j' for loop
 	}///close 'i' for loop
@@ -227,14 +238,49 @@ var gameOver = function(){///runs at the end of each click to see if the game is
 	if (numberOfTurns === (gridSize*gridSize) && (winner === undefined)) { ///check if the game is a draw
 		$('#playerMessage h3').text("DRAWN GAME!")
 		$('#gameOutline').css({
-			'background-color' : '#000000'
+			'background-color' : '#EEEEEE',
+			'border' : 'none',
+			'box-shadow' : '0 0 0 0 rgba(0,0,0,0.0)'
+		})
+		$('body').css({
+			'background-color' : '#EEEEEE'
 		});
 	}
 	else if (winner != undefined) { ///check if a winner has been found
 		$('#playerMessage h3').text("Congratulations "+winner+", you have won!")
-		.css({
-			'color' : 'green',
-			});///close css
+		if (winner === playerOne[0]){
+			$('body')
+			.css({
+				'background-color' : '#EF9A9A',
+				});
+			$('#gameOutline')
+			.css({
+				'background-color' : '#EF9A9A',
+				'border' : 'none',
+				'box-shadow' : '0 0 0 0 rgba(0,0,0,0.0)'
+			});
+			$('.enableClick')
+			.css({
+				'background-color' : '#EF9A9A',
+				'box-shadow' : '0 0 0 0 rgba(0,0,0,0.0)'
+			});
+		} else if (winner === playerTwo[0]){
+			$('body')
+			.css({
+				'background-color' : '#A5D6A7',
+				});
+			$('#gameOutline')
+			.css({
+				'background-color' : '#A5D6A7',
+				'border' : 'none',
+				'box-shadow' : '0 0 0 0 rgba(0,0,0,0.0)'
+			});
+			$('.enableClick')
+			.css({
+				'background-color' : '#A5D6A7',
+				'box-shadow' : '0 0 0 0 rgba(0,0,0,0.0)'
+			});
+		}
 	}
 	else {
 		console.log("from gameOver function: Game still in progress");
@@ -266,7 +312,8 @@ $('.col').on('click', function(){
 
 			if (whoIsPlayingNow === playerOne){ ///adds the css class for playerTwo
 				$(this)
-				.addClass('playerTwoClicked disableClick');
+				.addClass('playerTwoClicked disableClick')
+				.removeClass('enableClick');
 				$(this)
 				.text(playerTwo[2]);
 				$('#gameOutline').css({
@@ -275,7 +322,8 @@ $('.col').on('click', function(){
 			}
 			else { ///adds the css class for playerOne
 				$(this)
-				.addClass('playerOneClicked disableClick');
+				.addClass('playerOneClicked disableClick')
+				.removeClass('enableClick');
 				$(this)
 				.text(playerOne[2]);
 				$('#gameOutline').css({
@@ -313,29 +361,34 @@ var resetRound = function(){
 	rowThreeInput = emptyCellSymbolString.split("");
 	playerScoreThisRound = 0;
 	///reset css
-	$('body').css({
-		'background-color' : 'chartreuse',
+	$('body')
+	.css({
+		'background-color' : '',
+	});
+	$('#gameOutline')
+	.css({
+		'background-color' : '',
+		'box-shadow' : '',
+		'border' : ''
+	});
+	$('.col')
+	.removeClass('playerOneClicked playerTwoClicked disableClick')
+	.addClass('enableClick')
+	.text("")
+	.css({
+		'background-color' : '',
+	});
+	$('.enableClick')
+	.css({
+		'background-color' : '',
+		'box-shadow' : '',
+		'border' : ''
 	});
 	console.log(allInputsArray);
 	console.log("resetRound has been run");
 };
-
 $('#resetButton').on('click', function(){
 	resetRound();
 });
-
-//////////////////////////////////
-///SAMPLE PLAY MOVES//////////////
-//////////////////////////////////
-// playerMove(playerOne,0,0);
-// playerMove(playerTwo,0,1);
-// playerMove(playerOne,0,2);
-// playerMove(playerTwo,1,0);
-// playerMove(playerOne,1,1);
-// // playerMove(playerTwo,1,2);
-// // playerMove(playerOne,2,0);
-// playerMove(playerTwo,2,2);
-// playerMove(playerTwo,2,1);
-// playerMove(playerTwo,2,0);
 
 });///close the jQuery listener. $(function() means the page Document Object Model (DOM) is ready for JavaScript code to execute, images/scaffolding will load before any JavaScript does.
