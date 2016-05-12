@@ -38,8 +38,8 @@ $(function() {
     var emptyCellSymbolString = ""; ///variable length string that we split into an array later to populate the rowsInput arrays
     console.log("emptyCellSymbolString " + emptyCellSymbolString);
     var createEmptyCellSymbolString = function(gridSize) {
-		emptyCellSymbolString = "";
-		for (var i = 0; i < gridSize; i++) {
+        emptyCellSymbolString = "";
+        for (var i = 0; i < gridSize; i++) {
             emptyCellSymbolString += emptyCellSymbol; ///concatenate!
         } ///close for loop
     }; ///close createEmptyCellSymbolString
@@ -91,8 +91,8 @@ $(function() {
     populateWinningScores();
     console.log("winningScores " + winningScores);
 
-	///this is just a nicey function so that when we loop over the winningScores,
-	///the logged results are in numerical order.
+    ///this is just a nicey function so that when we loop over the winningScores,
+    ///the logged results are in numerical order.
     var sortWinningScores = function(a, b) {
         return a - b;
     };
@@ -437,17 +437,17 @@ $(function() {
         winner = undefined;
         playerOne[1] = 0;
         playerTwo[1] = 0;
-		whoIsPlayingNow = playerOne;
+        whoIsPlayingNow = playerOne;
         winner = undefined;
         // checkIfDisabled = 0;
         whoIsPlayingNow = playerOne; ///CREATE AN IF FUNCTION TODO
-		numberOfTurns = 0;
+        numberOfTurns = 0;
         winner = undefined;
-		emptyCellSymbolString = "";
-		createEmptyCellSymbolString(gridSize);
+        emptyCellSymbolString = "";
+        createEmptyCellSymbolString(gridSize);
         valuesArray = [1];
-		createValuesArray();
-		populateWinningScores();
+        createValuesArray();
+        populateWinningScores();
         rowOneInput = emptyCellSymbolString.split("");
         rowTwoInput = emptyCellSymbolString.split("");
         rowThreeInput = emptyCellSymbolString.split("");
@@ -525,7 +525,7 @@ $(function() {
         $('#gameSection').empty();
         makeGameArea();
         resetRound();
-		cellClickListener(); ///initiate the listener
+        cellClickListener(); ///initiate the listener
         $('.enableClick')
             .css({
                 'background-color': '',
@@ -540,12 +540,6 @@ $(function() {
                 'color': '#BBDEFB',
                 'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
             });
-
-        /////////////////////////////////////////////////////
-
-
-
-        //////////////////////////////////////////////////////
     };
 
     $('#gridSize3').on('click', function() {
@@ -570,7 +564,7 @@ $(function() {
         console.log("currentRound " + currentRound);
         console.log("overallWinner " + overallWinner);
         console.log("emptyCellSymbol " + emptyCellSymbol);
-        console.log("gridSize "+gridSize);
+        console.log("gridSize " + gridSize);
         console.log("emptyCellSymbolString " + emptyCellSymbolString);
         console.log("valuesArray for a grid size of " + gridSize + " = " + valuesArray);
         console.log("valuesArray " + valuesArray);
