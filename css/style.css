@@ -46,10 +46,17 @@ h1 {
     max-width: 384px;
 }
 #gameSection {
-    margin: 0 auto;
+	width: 100%;
+	display: inline-flex;
+    justify-content: center;
+}
+#gameSidePanel {
+	min-width: 100%;
+	min-height: 100%;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
+	/*background-color: tomato;*/
 }
 #gameOutline {
     background-color: #f5f5f5;
@@ -69,6 +76,15 @@ h1 {
     align-items: center;
     text-shadow: 2px 2px #000000;
 }
+/*#sidePanel { ///ABANDON SIDEPANEL FOR NOW :(
+	min-width: 30%;
+	min-height: 100%;
+	margin: 0 auto;
+    display: inline-flex;
+    justify-content: center;
+    box-sizing: border-box;
+	background-color: purple;
+}*/
 div .colz {
     background-color: #eeeeee;
     min-width: 10vh;
@@ -86,7 +102,7 @@ div .colz {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     transition: all 0.2s ease-in-out;
 }
-div .col:hover {
+div .colz:hover {
     box-shadow: 9px 9px 9px rgba(0, 0, 0, 0.5);
     border: 1px solid black;
 }

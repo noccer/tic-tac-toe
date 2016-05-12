@@ -14,8 +14,8 @@ $(function() {
     var gridSize = 3; ///this will determine the grid size
     var consecutiveTiles = 3; ///I may use this to build a
 
-    var playerOne = ["Player 1", 0, "X"]; ///name, score & symbol
-    var playerTwo = ["Player 2", 0, "O"]; ///name, score & symbol
+    var playerOne = ["Player 1", 0, "X", 0]; ///name, score, symbol, gamesWon
+    var playerTwo = ["Player 2", 0, "O", 0]; ///name, score, symbol, gamesWon
     var whoIsPlayingNow = playerOne; ///check whose turn it is
     console.log("whoIsPlayingNow = " + whoIsPlayingNow[0]);
     var numberOfTurns = 0; ///when this = 9, the game is over and it's possibly a draw
@@ -209,11 +209,15 @@ $(function() {
 
     var makeGameArea = function() { ///generates the gaming area
         welcomeMessages();
-        var gameOutline = $('<div>')
-            .attr('id', 'gameOutline')
-            // .addClass('col-md-6')
-        ;
+		var gameOutline = $('<div>')
+            .attr('id', 'gameOutline');
         gameOutline.appendTo($('#gameSection'));
+		// var gameSidePanel = $('<div>') ///ABANDON SIDEPANELS FOR NOW
+        //     .attr('id', 'gameSidePanel');
+        // gameSidePanel.appendTo($('#gameSection'));
+		// var gameOutline = $('<div>')
+        //     .attr('id', 'gameOutline');
+        // gameOutline.appendTo($('#gameSidePanel'));
         ///make rows
         for (var i = 0; i < gridSize; i++) {
             var rows = $('<div>')
@@ -233,8 +237,14 @@ $(function() {
     makeGameArea(); ///initiate the gameArea
 
     var makeSidePanel = function() {
-        ///TO BE COMPLETED
+		var sidePanel = $('<div>')
+            .attr('id', 'sidePanel');
+            // .addClass('col-md-6')
+			sidePanel.appendTo($('#gameSection'))
+			;
     };
+	makeSidePanel();
+
 
     var gameOver = function() { ///runs at the end of each click to see if the game is over by DRAW or by WINNER.
         if (numberOfTurns === (gridSize * gridSize) && (winner === undefined)) { ///check if the game is a draw
