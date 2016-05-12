@@ -11,8 +11,8 @@ $(function() {
     //    \  / (_| | |  | | (_| | |_) | |  __/\__ \
     // 	\/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
 
-    var gridSize = 5; ///this will determine the grid size
-    var consecutiveTiles = 4; ///I may use this to build a
+    var gridSize = 3; ///this will determine the grid size
+    var consecutiveTiles = 3; ///I may use this to build a
 
     var playerOne = ["Player 1", 0, "X", 0]; ///name, score, symbol, gamesWon
     var playerTwo = ["Player 2", 0, "O", 0]; ///name, score, symbol, gamesWon
@@ -20,7 +20,12 @@ $(function() {
     console.log("whoIsPlayingNow = " + whoIsPlayingNow[0]);
     var numberOfTurns = 0; ///when this = gridSize^2, the game is over and it's possibly a draw
     var winner;
-    var emptyCellSymbol = "_"; ///this is just to set a default value. I might use this value in the front end at some point.
+
+	var currentRound = 1;
+
+	var overallWinner;
+
+	var emptyCellSymbol = "_"; ///this is just to set a default value. I might use this value in the front end at some point.
     var emptyCellSymbolString = ""; ///variable length string that we split into an array later to populate the rowsInput arrays
     var createEmptyCellSymbolString = function() {
         for (var i = 0; i < gridSize; i++) {
@@ -152,7 +157,16 @@ $(function() {
     ///HOW IT WORKS:
     ///there are 2 sets of arrays: input arrays, and cell value arrays. When a user selects a cell, the value of that cell is pulled out and added to their comulative score. When a player score matches one of the winning combinations i.e. 3 in a row in any of these directions: horiz - vert | or either diagonal / \ ...
     var playerMove = function(player, rowNum, colNum) { ///update arguments
-        if (allInputsArray[rowNum][colNum] === emptyCellSymbol) { ///checks allInputs array to see if a move has been made already. If no move has been made, the 'empty' cell will contain emptyCellSymbol
+		if ((numberOfTurns > -1) && (winner === undefined)){
+			$('#actionButton')
+			.css({
+				'background-color' : '',
+				'border' : '',
+				'color' : '',
+				'box-shadow': ''
+			});
+		}
+		if (allInputsArray[rowNum][colNum] === emptyCellSymbol) { ///checks allInputs array to see if a move has been made already. If no move has been made, the 'empty' cell will contain emptyCellSymbol
             allInputsArray[rowNum].splice(colNum, 1, player[2]); ///updates the allInputsArray to contain the players marker rather than emptyCellSymbol
         }
         console.table(allInputsArray);
@@ -179,17 +193,17 @@ $(function() {
             ///the following if statement checks to see if the player score to date has a component of winningScores[i] in it. this is achieved using the '&' /'AND' symbol.
             ///See "JavaScript Bitwise Operators" on http://www.w3schools.com/jsref/jsref_operators.asp for more information about this. BITWISE checking.
             ///http://www.i-programmer.info/programming/javascript/2550-javascript-bit-manipulation.html
-            console.log("checking winning scores for loop no." + i);
-            console.log("player[1]score = " + player[1]);
-            console.log("player[1]score in binary = " + player[1].toString(2));
-            console.log("winningScores[i] = " + winningScores[i]);
-            console.log("winningScores[i] in binary = " + winningScores[i].toString(2));
+            // console.log("checking winning scores for loop no." + i);
+            // console.log("player[1]score = " + player[1]);
+            // console.log("player[1]score in binary = " + player[1].toString(2));
+            // console.log("winningScores[i] = " + winningScores[i]);
+            // console.log("winningScores[i] in binary = " + winningScores[i].toString(2));
             if ((player[1] & winningScores[i]) === winningScores[i]) {
                 console.log(player[0] + " won!");
                 winner = player[0];
                 console.log("WE HAVE A WINNER: WINNER = " + winner);
             }
-            playerScoreThisRound = 0;
+        playerScoreThisRound = 0;
         } ///close for loop
     }; ///close checkWhoWon
 
@@ -234,6 +248,13 @@ $(function() {
                 cols.appendTo($('.row' + (i))); ///apply
             } ///close 'j' for loop
         } ///close 'i' for loop
+		$('#actionButton')
+		.css({
+			'background-color' : 'Transparent',
+			'border' : 'none',
+			'color' : '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
     }; ///close makeGameArea
     makeGameArea(); ///initiate the gameArea
 
@@ -249,29 +270,34 @@ $(function() {
 
     var gameOver = function() { ///runs at the end of each click to see if the game is over by DRAW or by WINNER.
         if (numberOfTurns === (gridSize * gridSize) && (winner === undefined)) { ///check if the game is a draw
-            $('#playerMessage h3').text("DRAWN GAME!");
+            $('#playerMessage h3').text("Drawn Game, Try Again!");
             $('#gameOutline').css({
                 'background-color': '#EEEEEE',
                 'border': 'none',
                 'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
             });
-            $('body').css({
+            $('html').css({
                 'background-color': '#EEEEEE'
             });
-        } else if (winner !== undefined) { ///check if a winner has been found
-            $('#playerMessage h3').text("Congratulations " + winner + ", you have won!");
-			$('#resetButton')
-			// .text('Next Round')
+			$('#actionButton')
 			.css({
-				// 'background-color': 'Transparent',
-				// 'border': 'none',
-				// 'cursor':'pointer',
-				// 'overflow': 'hidden',
-				// 'outline':'none',
-				'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+				'background-color': '#D32F2F',
+				'box-shadow': '20px 20px 20px 0 rgba(0,0,0,0.5)'
 			});
+        } else if (winner !== undefined) { ///check if a winner has been found
+			$('#playerMessage h3').text(winner + " wins!");
+			$('#actionButton')
+			.text('Next')
+			.css({
+				'background-color': '#388E3C',
+				'box-shadow': '20px 20px 20px 0 rgba(0,0,0,0.5)'
+			})
+			;
             if (winner === playerOne[0]) {
-                $('body')
+				playerOne[3]++;
+				$('#playerOneScore')
+				.text("Player 1 = "+playerOne[3]);
+				$('html')
                     .css({
                         'background-color': '#EF9A9A',
                     });
@@ -281,13 +307,16 @@ $(function() {
                         'border': 'none',
                         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
                     });
-                $('.enableClick')
-                    .css({
-                        'background-color': '#EF9A9A',
-                        'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
-                    });
+                // $('.enableClick')
+                //     .css({
+                //         'background-color': '#EF9A9A',
+                //         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+                //     });
             } else if (winner === playerTwo[0]) {
-                $('body')
+				playerTwo[3]++;
+				$('#playerTwoScore')
+				.text("Player 2 = "+playerTwo[3]);
+				$('html')
                     .css({
                         'background-color': '#A5D6A7',
                     });
@@ -297,20 +326,21 @@ $(function() {
                         'border': 'none',
                         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
                     });
-                $('.enableClick')
-                    .css({
-                        'background-color': '#A5D6A7',
-                        'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
-                    });
+                // $('.enableClick')
+                //     .css({
+                //         'background-color': '#A5D6A7',
+                //         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+                //     });
             }
+			console.log(playerOne[0]+' score = '+playerOne[3]+' - '+playerTwo[0]+' score = '+playerTwo[3]);
         } else {
             console.log("from gameOver function: Game still in progress");
         }
     }; ///close gameOver function
 
     $('.colz').on('click', function() {
-        console.log("click listener intiated. winner is " + winner);
-        if (winner === undefined) { ///check if the game is over or not
+		console.log("click listener intiated. winner is " + winner);
+        if (winner === undefined) { ///check if the round is over or not
             console.log("here are the classes from your click");
             var clickedBoxClassList = ($(this).attr("class")); ///returns string of  the classes that were clicked
             console.log("clickedBoxClassList is " + clickedBoxClassList);
@@ -320,15 +350,15 @@ $(function() {
                 var searchClickedBoxClassList = clickedBoxClassList.search('disableClick');
                 console.log("the value of disableClick is: " + searchClickedBoxClassList);
                 checkIfDisabled = searchClickedBoxClassList;
+				console.log("checkIfDisabled value is: " + checkIfDisabled);
             };
             checkIfDisabledFunction();
-            console.log("checkIfDisabled value is: " + checkIfDisabled);
+
             if ((checkIfDisabled === (-1)) && winner === undefined) {
                 console.log(clickedBoxClassList);
-
                 var rowClicked = clickedBoxClassListArray[1]; ///make playerMove more readable!
                 var colClicked = clickedBoxClassListArray[3]; ///make playerMove more readable!
-
+				// if ()
                 playerMove(whoIsPlayingNow, rowClicked, colClicked);
 
                 if (whoIsPlayingNow === playerOne) { ///adds the css class for playerTwo
@@ -353,7 +383,7 @@ $(function() {
                 $('#playerMessage h4').empty();
                 $('#playerMessage h3').text(whoIsPlayingNow[0] + ": make your move!")
                     .css({
-                        'color': 'black'
+                        'color': ''
                     }); ///close css
                 numberOfTurns++; ///increase the number of turns that have been played
                 console.log("numberOfTurns so far = " + numberOfTurns);
@@ -389,9 +419,10 @@ $(function() {
         rowThreeInput = emptyCellSymbolString.split("");
 		rowFourInput = emptyCellSymbolString.split("");
 	    rowFiveInput = emptyCellSymbolString.split("");
+		createValuesAndInputsArrays();
         playerScoreThisRound = 0;
         ///reset css
-        $('body')
+        $('html')
             .css({
                 'background-color': '',
             });
@@ -414,15 +445,19 @@ $(function() {
                 'box-shadow': '',
                 'border': ''
             });
-		$('#resetButton')
-			.css({
-				'box-shadow' : '',
-			});
         console.log(allInputsArray);
         console.log("resetRound has been run");
     };
-    $('#resetButton').on('click', function() {
+    $('#actionButton').on('click', function() {
         resetRound();
+		$(this)
+		.text('Reset')
+		.css({
+			'background-color' : 'Transparent',
+			'border' : 'none',
+			'color' : '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
     });
 
     // ___           _             _              _ _
@@ -437,8 +472,41 @@ $(function() {
 	var restartAll = function(){
 
 	};
-	$('#startOverButton').on('click', function() {
-        resetRound();
+	$('#restartAllButton').on('click', function() {
+        resetRound();// resetRound();
+	playerOne[3] = 0;
+	$('#playerOneScore').text("Player 1 = 0");
+	playerTwo[3] = 0;
+	$('#playerTwoScore').text("Player 2 = 0");
+	overallWinner = undefined;
+
     });
 
 }); ///close the jQuery listener. $(function() means the page Document Object Model (DOM) is ready for JavaScript code to execute, images/scaffolding will load before any JavaScript does.
+
+  $(function() {
+    var spinner = $( "#spinner" ).spinner();
+
+    $( "#disable" ).click(function() {
+      if ( spinner.spinner( "option", "disabled" ) ) {
+        spinner.spinner( "enable" );
+      } else {
+        spinner.spinner( "disable" );
+      }
+    });
+    $( "#destroy" ).click(function() {
+      if ( spinner.spinner( "instance" ) ) {
+        spinner.spinner( "destroy" );
+      } else {
+        spinner.spinner();
+      }
+    });
+    $( "#getvalue" ).click(function() {
+      alert( spinner.spinner( "value" ) );
+    });
+    $( "#setvalue" ).click(function() {
+      spinner.spinner( "value", 5 );
+    });
+
+    $( "button" ).button();
+  });
