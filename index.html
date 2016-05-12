@@ -5,13 +5,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tic-Tac-Toe</title>
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab|Permanent+Marker' rel='stylesheet' type='text/css'>
+	<!-- <link href='https://fonts.googleapis.com/css?family=Roboto+Slab|Permanent+Marker' rel='stylesheet' type='text/css'> -->
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="http://csshake.surge.sh/csshake.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://csshake.surge.sh/csshake.min.css"> -->
 	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 	<script src="js/jquery.min.js"></script>
-	<script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="js/app.js"></script>
 	<script>
 		(function(i, s, o, g, r, a, m) {
@@ -46,15 +44,27 @@
 		<button id="actionButton">Reset
 		</button>
 		<h3 id="playerTwoScore">Player 2 = 0</h3>
-		<!-- <button id="restartAllButton">Start Over
-		</button> -->
+		<button id="restartAllButton">Start Over
+		</button>
 
 	</section>
+	<section id="options">
+		<div id="gridSizeButtons">
+			<button id="gridSize3">3x3</button>
+			<button id="gridSize4">4x4</button>
+			<button id="gridSize5">5x5</button>
+		</div>
+		<div id="inARowButtons">
+			<h3></h3>
+			<button id="inARow3">3-in-a-row</button>
+			<button id="inARow4">4-in-a-row</button>
+			<button id="inARow5">5-in-a-row</button>
+		</div>
+	</section>
 	<footer>
-		<button id="restartAllButton">RESTARTALL</button>
-		<label for="spinner">Select a value:</label>
-		<input id="spinner" name="value">
-		<!-- <img src="img/general-assembly.png" alt=""> -->
+		<!-- <button id="restartAllButton">RESTARTALL</button> -->
+
+		<img src="img/general-assembly.png" alt="">
 	</footer>
 
 </body>

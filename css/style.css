@@ -1,5 +1,5 @@
 * {
-    /*border: 1px solid black;*/
+    border: 1px solid black;
     margin: 0;
     padding: 0;
 }
@@ -170,4 +170,17 @@ img {
     /*max width: 15vh;*/
     height: 50px;
     /*min-height: 15vw;*/
+}
+select {
+	/*width: 130px;*/
+	font-family: 'Roboto Slab';
+	border: 0;
+	height: 6vh;
+	padding: 10px;
+	font-size: 16px;
+	text-align: center;
+	outline: none;
+}
+option {
+	text-align: center;
 }
