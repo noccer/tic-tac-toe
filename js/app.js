@@ -260,7 +260,7 @@ $(function() {
             });
         } else if (winner !== undefined) { ///check if a winner has been found
             $('#playerMessage h3').text("Congratulations " + winner + ", you have won!");
-			$('.resetButton')
+			$('#resetButton')
 			// .text('Next Round')
 			.css({
 				// 'background-color': 'Transparent',
@@ -414,10 +414,14 @@ $(function() {
                 'box-shadow': '',
                 'border': ''
             });
+		$('#resetButton')
+			.css({
+				'box-shadow' : '',
+			});
         console.log(allInputsArray);
         console.log("resetRound has been run");
     };
-    $('.resetButton').on('click', function() {
+    $('#resetButton').on('click', function() {
         resetRound();
     });
 
@@ -433,7 +437,7 @@ $(function() {
 	var restartAll = function(){
 
 	};
-	$('#restartButton').on('click', function() {
+	$('#startOverButton').on('click', function() {
         resetRound();
     });
 
