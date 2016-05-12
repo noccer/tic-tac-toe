@@ -11,8 +11,8 @@ $(function() {
     //    \  / (_| | |  | | (_| | |_) | |  __/\__ \
     // 	\/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
 
-    var gridSize = 3; ///this will determine the grid size
-    var consecutiveTiles = 3; ///I may use this to build a
+    var gridSize = 5; ///this will determine the grid size
+    var consecutiveTiles = 4; ///I may use this to build a
 
     var playerOne = ["Player 1", 0, "X", 0]; ///name, score, symbol, gamesWon
     var playerTwo = ["Player 2", 0, "O", 0]; ///name, score, symbol, gamesWon
@@ -260,6 +260,16 @@ $(function() {
             });
         } else if (winner !== undefined) { ///check if a winner has been found
             $('#playerMessage h3').text("Congratulations " + winner + ", you have won!");
+			$('.resetButton')
+			// .text('Next Round')
+			.css({
+				// 'background-color': 'Transparent',
+				// 'border': 'none',
+				// 'cursor':'pointer',
+				// 'overflow': 'hidden',
+				// 'outline':'none',
+				'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+			});
             if (winner === playerOne[0]) {
                 $('body')
                     .css({
@@ -349,10 +359,11 @@ $(function() {
                 console.log("numberOfTurns so far = " + numberOfTurns);
             } ///close if disableClick
             else if (numberOfTurns != (gridSize * gridSize)) {
-                $('#playerMessage h3').text("Try again " + whoIsPlayingNow[0] + "! That box is already chosen...")
+                $('#playerMessage h3').text("Try again " + whoIsPlayingNow[0]+"!")
                     .css({
                         'color': 'red',
                     }); ///close css
+				$(this).addClass('shake-horizontal');
             } ///close elseif
         } ///close the "if there is a winner" if statement.
         gameOver();
@@ -391,7 +402,7 @@ $(function() {
                 'border': ''
             });
         $('.colz')
-            .removeClass('playerOneClicked playerTwoClicked disableClick')
+            .removeClass('playerOneClicked playerTwoClicked disableClick shake-horizontal')
             .addClass('enableClick')
             .text("")
             .css({
@@ -406,7 +417,7 @@ $(function() {
         console.log(allInputsArray);
         console.log("resetRound has been run");
     };
-    $('#resetButton').on('click', function() {
+    $('.resetButton').on('click', function() {
         resetRound();
     });
 
