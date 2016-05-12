@@ -15,6 +15,7 @@ $(function() {
 	console.log("gridSize " + gridSize);
 	var consecutiveTiles = 3; ///I may use this to build a
 	console.log("consecutiveTiles " + consecutiveTiles);
+	var numOfGamesToWinMatch = 3;
 
 	var playerOne = ["Player 1", 0, "X", 0]; ///name, score, symbol, gamesWon
 	console.log("playerOne " + playerOne);
@@ -198,8 +199,9 @@ $(function() {
 		console.log(player[0] + " current score is: " + player[1]);
 		checkWhoWon(player);
 		console.log(whoIsPlayingNow[0] + " has just taken a turn");
-		console.log("right now the winner is: " + winner);
+		console.log("this round winner is: " + winner);
 		///check who has been playing this round then swap to other player
+		checkWhoWonMatch();
 		if (whoIsPlayingNow[0] === playerOne[0]) {
 			whoIsPlayingNow = playerTwo;
 		} else {
@@ -209,6 +211,17 @@ $(function() {
 			console.log(whoIsPlayingNow[0] + " is up next");
 		}
 	}; ///close playerMove
+
+	var checkWhoWonMatch = function(){
+		console.log("checkWhoWonMatch");
+		console.log(playerOne[3]);
+		console.log(numOfGamesToWinMatch);
+		if (playerOne[3] === numOfGamesToWinMatch){
+			overallWinner = playerOne;
+		} else if (playerTwo[3] === numOfGamesToWinMatch) {
+			overallWinner = playerTwo;
+		}
+	};
 
 	var checkWhoWon = function(player) {
 		for (var i = 0; i < winningScores.length; i++) {
@@ -227,8 +240,12 @@ $(function() {
 				console.log("WE HAVE A WINNER: WINNER = " + winner);
 			}
 			playerScoreThisRound = 0;
+
+
 		} ///close for loop
 	}; ///close checkWhoWon
+
+
 
 	// _____   ____  __  __   ______                _   _
 	// |  __ \ / __ \|  \/  | |  ____|              | | (_)
@@ -289,7 +306,12 @@ $(function() {
 	// 		;
 	// };
 	// makeSidePanel();
-
+	var updatePlayerOneScore = function (){
+		$('#playerOneScore').text(playerOne[0]+" = " + playerOne[3]);
+	};
+	var updatePlayerTwoScore = function (){
+		$('#playerTwoScore').text(playerTwo[0]+" = " + playerTwo[3]);
+	};
 
 	var gameOver = function() { ///runs at the end of each click to see if the game is over by DRAW or by WINNER.
 		if (numberOfTurns === (gridSize * gridSize) && (winner === undefined)) { ///check if the game is a draw
@@ -307,6 +329,10 @@ $(function() {
 					'background-color': '#D32F2F',
 					'box-shadow': '20px 20px 20px 0 rgba(0,0,0,0.5)'
 				});
+			$('#gridSizeSection, #inARowSection')
+			.css({
+				'display' : 'none !important' ,
+			})
 		} else if (winner !== undefined) { ///check if a winner has been found
 			$('#playerMessage h3').text(winner + " wins!");
 			$('#actionButton')
@@ -317,8 +343,7 @@ $(function() {
 				});
 			if (winner === playerOne[0]) {
 				playerOne[3]++;
-				$('#playerOneScore')
-					.text("Player 1 = " + playerOne[3]);
+				updatePlayerOneScore();
 				$('html')
 					.css({
 						'background-color': '#EF9A9A',
@@ -334,10 +359,10 @@ $(function() {
 				//         'background-color': '#EF9A9A',
 				//         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
 				//     });
+				checkWhoWonMatch();
 			} else if (winner === playerTwo[0]) {
 				playerTwo[3]++;
-				$('#playerTwoScore')
-					.text("Player 2 = " + playerTwo[3]);
+				updatePlayerTwoScore();
 				$('html')
 					.css({
 						'background-color': '#A5D6A7',
@@ -353,11 +378,26 @@ $(function() {
 				//         'background-color': '#A5D6A7',
 				//         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
 				//     });
+				checkWhoWonMatch();
 			}
 			console.log(playerOne[0] + ' score = ' + playerOne[3] + ' - ' + playerTwo[0] + ' score = ' + playerTwo[3]);
 		} else {
 			console.log("from gameOver function: Game still in progress");
 		}
+		///check if match won!!!
+		if (overallWinner !== undefined){
+			if (overallWinner === playerOne)
+				$('html')
+				.css({
+					'background-color' : '#F44336',
+				});
+			} else if (overallWinner === playerTwo){
+				$('html')
+				.css({
+					'background-color' : '#4CAF50',
+				});
+			}
+
 	}; ///close gameOver function
 
 	var cellClickListener = function() {
@@ -493,27 +533,11 @@ $(function() {
 	};
 
 	$('#actionButton').on('click', function() {
-		resetRound();
-	});
-
-	// ___           _             _              _ _
-	// |  __ \         | |           | |       /\   | | |
-	// | |__) |___  ___| |_ __ _ _ __| |_     /  \  | | |
-	// |  _  // _ \/ __| __/ _` | '__| __|   / /\ \ | | |
-	// | | \ \  __/\__ \ || (_| | |  | |_   / ____ \| | |
-	// |_|  \_\___||___/\__\__,_|_|   \__| /_/    \_\_|_|
-	//
-	//
-	///resets number of games and restart:
-	var restartAll = function() {
-
-	};
-	$('#restartAllButton').on('click', function() {
-		resetRound();
+		gameAreaEraser();
 	});
 
 	////GRID OPTIONS
-	var boardEraser = function() {
+	var gameAreaEraser = function() {
 		$('#playerMessage').empty();
 		$('#gameSection').empty();
 		makeGameArea();
@@ -535,14 +559,102 @@ $(function() {
 			});
 	};
 
+	var buttonFader = function(){
+		$('this')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
+	};
+
 	$('#gridSize3').on('click', function() {
 		gridSize = 3;
-		boardEraser();
-		$('#inARow3, #inARow4, #inARow5').hide();
+		consecutiveTiles = 3;
+		gameAreaEraser();
+		playerOne[3] = 0;
+		playerTwo[3] = 0;
+		updatePlayerOneScore();
+		updatePlayerTwoScore();
+		$('#gridSize4, #gridSize5, #inARow3, #inARow4, #inARow5')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
 	});
 	$('#gridSize4').on('click', function() {
 		gridSize = 4;
-		boardEraser();
+		consecutiveTiles = 4;
+		gameAreaEraser();
+		playerOne[3] = 0;
+		playerTwo[3] = 0;
+		updatePlayerOneScore();
+		updatePlayerTwoScore();
+		$('#gridSize3, #gridSize5, #inARow5')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
+	});
+	$('#gridSize5').on('click', function() {
+		gridSize = 5;
+		consecutiveTiles = 5;
+		gameAreaEraser();
+		playerOne[3] = 0;
+		playerTwo[3] = 0;
+		updatePlayerOneScore();
+		updatePlayerTwoScore();
+		$('#gridSize3, #gridSize4')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
+	});
+	$('#inARow3').on('click', function() {
+		consecutiveTiles = 3;
+		gameAreaEraser();
+		updatePlayerOneScore();
+		updatePlayerTwoScore();
+		$('#inARow4, #inARow5')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
+	});
+	$('#inARow4').on('click', function() {
+		consecutiveTiles = 4;
+		gameAreaEraser();
+		updatePlayerOneScore();
+		updatePlayerTwoScore();
+		$('#inARow3, #inARow5')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
+	});
+	$('#inARow5').on('click', function() {
+		consecutiveTiles = 5;
+		gameAreaEraser();
+		updatePlayerOneScore();
+		updatePlayerTwoScore();
+		$('#inARow3, #inARow4')
+		.css({
+			'background-color': 'Transparent',
+			'border': 'none',
+			'color': '#BBDEFB',
+			'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+		});
 	});
 	////DEBUG
 	var consoleLogs = function() {
