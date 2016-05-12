@@ -20,7 +20,7 @@ $(function() {
 	console.log("playerOne " + playerOne);
 	var playerTwo = ["Player 2", 0, "O", 0]; ///name, score, symbol, gamesWon
 	console.log("playerTwo " + playerTwo);
-	var whoIsPlayingNow = playerOne; ///check whose turn it is
+	var whoIsPlayingNow = playerOne; ///check whose turn it is TODO
 	console.log("whoIsPlayingNow = " + whoIsPlayingNow[0]);
 	var numberOfTurns = 0; ///when this = gridSize^2, the game is over and it's possibly a draw
 	console.log("numberOfTurns " + numberOfTurns);
