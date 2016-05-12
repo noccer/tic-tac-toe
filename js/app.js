@@ -229,11 +229,12 @@ $(function() {
 			///the following if statement checks to see if the player score to date has a component of winningScores[i] in it. this is achieved using the '&' /'AND' symbol.
 			///See "JavaScript Bitwise Operators" on http://www.w3schools.com/jsref/jsref_operators.asp for more information about this. BITWISE checking.
 			///http://www.i-programmer.info/programming/javascript/2550-javascript-bit-manipulation.html
-			// console.log("checking winning scores for loop no." + i);
-			// console.log("player[1]score = " + player[1]);
-			// console.log("player[1]score in binary = " + player[1].toString(2));
-			// console.log("winningScores[i] = " + winningScores[i]);
-			// console.log("winningScores[i] in binary = " + winningScores[i].toString(2));
+			/// PRESENTATION
+			console.log("checking winning scores for loop no." + i);
+			console.log(player[0]+" score = " + player[1]);
+			console.log(player[0]+" score in binary = " + player[1].toString(2));
+			console.log("winningScores[i] = " + winningScores[i]);
+			console.log("winningScores[i] in binary = " + winningScores[i].toString(2));
 			if ((player[1] & winningScores[i]) === winningScores[i]) {
 				console.log(player[0] + " won!");
 				winner = player[0];

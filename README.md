@@ -13,11 +13,24 @@ The key features I wanted in my game were:
 - JavaScript
 - jQuery
 - Google Fonts
-- ShakyCSS - To make already clicked buttons shake!
+- [ShakyCSS](https://elrumordelaluz.github.io/csshake/ "Get your shake on!") - To make already clicked buttons shake!
 
 ## Approach Taken
 
-I opted to go for the Magic numbers solution. This was highly challenging because depending
+I opted to go for the Magic numbers solution. This was fairly challenging concept because the 'winning values' of each cell change depending on number of tiles and number of tiles-in-a-row to win. Here are the following possibilities:
+
+- 3x3 grid - 3-in-a-row
+- 4x4 grid - 3-in-a-row
+- 4x4 grid - 4-in-a-row
+- 5x5 grid - 3-in-a-row
+- 5x5 grid - 4-in-a-row
+- 5x5 grid - 5-in-a-row
+
+The magic numbers solution means assigning a value of 1 to the top-left cell, then double the following cell, and so on to the end. The last value in the 3x3 grid is 256, while the last in the 5x5 is worth 16777216!  When a player selects a cell, the value of this cell is added to their score to be checked against the 'winningScores' array.
+
+I gathered up all the possible winning combinations for the 6 arrays, concatenated the values in to comma separated strings, then imported directly into 6 unique arrays in my JavaScript app. When a player chooses a grid size or how many tiles to be used, the program checks these parameters and pulls out the correct 'winningScores' array.
+
+The final piece of the magic numbers is when a player happens to win a round, but their score is not a number contained in the winningScores array. I used a Bitwise operator to check if the players winning score was a component of the 'winningScores' array. See notes on line 228 of the app.js file.
 
 ## Unsolved Problems
 
