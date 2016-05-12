@@ -18,7 +18,7 @@ $(function() {
     var playerTwo = ["Player 2", 0, "O", 0]; ///name, score, symbol, gamesWon
     var whoIsPlayingNow = playerOne; ///check whose turn it is
     console.log("whoIsPlayingNow = " + whoIsPlayingNow[0]);
-    var numberOfTurns = 0; ///when this = 9, the game is over and it's possibly a draw
+    var numberOfTurns = 0; ///when this = gridSize^2, the game is over and it's possibly a draw
     var winner;
     var emptyCellSymbol = "_"; ///this is just to set a default value. I might use this value in the front end at some point.
     var emptyCellSymbolString = ""; ///variable length string that we split into an array later to populate the rowsInput arrays
@@ -43,7 +43,8 @@ $(function() {
     var winningScoresG3L3 = [273, 84, 73, 146, 292, 7, 56, 448];
     var winningScoresG4L3 = [273, 546, 1092, 2184, 4368, 8736, 17472, 34944, 7, 14, 112, 224, 1792, 3584, 28672, 57344];
     var winningScoresG4L4 = [33825, 4680, 4369, 8738, 17476, 34952, 15, 240, 3840, 61440];
-    var winningScoresG5L3 = [1057, 2114, 4228, 8456, 16912, 33824, 67648, 135296, 270592, 541184, 1082368, 2164736, 4329472, 8658944, 17317888, 7, 224, 7168, 229376, 7340032, 14, 448, 14336, 458752, 14680064, 28, 896, 28672, 917504, 29360128, 4161, 8322, 16644, 133152, 266304, 532608, 4260864, 8521728, 17043456, 1092, 2184, 4368, 34944, 69888, 139776, 2236416, 4472832];
+    var winningScoresG5L3 = [1057, 2114, 4228, 8456, 16912, 33824, 67648, 135296, 270592, 541184, 1082368, 2164736, 4329472, 8658944, 17317888, 7, 224, 7168, 229376, 7340032, 14, 448, 14336, 458752, 14680064, 28, 896, 28672, 917504, 29360128, 4161, 8322,
+	16644, 133152, 266304, 532608, 4260864, 8521728, 17043456, 1092, 2184, 4368, 34944, 69888, 139776, 2236416, 4472832];
     var winningScoresG5L4 = [266305, 532610, 8521760, 17043520, 34952, 69904, 1118464, 2236928, 33825, 67650, 135300, 270600, 541200, 1082400, 2164800, 4329600, 8659200, 17318400, 15, 30, 480, 960, 15360, 30720, 491520, 983040, 15728640, 31457280];
     var winningScoresG5L5 = [17043521, 1118480, 1082401, 2164802, 4329604, 8659208, 17318416, 31, 992, 31744, 1015808, 32505856];
 
@@ -375,6 +376,8 @@ $(function() {
         rowOneInput = emptyCellSymbolString.split("");
         rowTwoInput = emptyCellSymbolString.split("");
         rowThreeInput = emptyCellSymbolString.split("");
+		rowFourInput = emptyCellSymbolString.split("");
+	    rowFiveInput = emptyCellSymbolString.split("");
         playerScoreThisRound = 0;
         ///reset css
         $('body')
@@ -415,5 +418,12 @@ $(function() {
     // |_|  \_\___||___/\__\__,_|_|   \__| /_/    \_\_|_|
     //
     //
+	///resets number of games and restart:
+	var restartAll = function(){
+
+	};
+	$('#restartButton').on('click', function() {
+        resetRound();
+    });
 
 }); ///close the jQuery listener. $(function() means the page Document Object Model (DOM) is ready for JavaScript code to execute, images/scaffolding will load before any JavaScript does.
