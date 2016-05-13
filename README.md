@@ -57,5 +57,4 @@ I would have liked to have programmed in the following logic:
 <https://github.com/noccer2016/tic-tac-toe>
 
 ## Hosted Version of My Game
-(temporary until loaded into gh-pages)
-https://dl.dropboxusercontent.com/u/16431072/niall_tic-tac-toe/index.html
+http://noccer2016.github.io/tic-tac-toe/

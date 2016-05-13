@@ -62,8 +62,10 @@ $(function() {
 	///these are the scores that will return a winning score hit. Because each 'cell' is worth double the value of its predecessor, we can do a CHECKSUM on the results to see if somebody won.
 	///I generated these values from an Excel sheet, refer to resources/calculate_winningScores.xlsx
 	var winningScoresG3L3 = [273, 84, 73, 146, 292, 7, 56, 448];
-	var winningScoresG4L3 = [273, 546, 1092, 2184, 4368, 8736, 17472, 34944, 7, 14, 112, 224, 1792, 3584, 28672, 57344];
-	var winningScoresG4L4 = [33825, 4680, 4369, 8738, 17476, 34952, 15, 240, 3840, 61440];
+	var winningScoresG4L3 = [273, 546, 1092, 2184, 4368, 8736, 17472, 34944, 7, 14, 112, 224, 1792, 3584, 28672, 57344, 1057, 2114, 16912, 33824, 292, 584, 4672, 9344];
+	console.log(winningScoresG4L3);
+	console.log((winningScoresG4L3).sort(sortWinningScores));
+	var winningScoresG4L4 = [33825,4680, 4369, 8738, 17476, 34952, 15, 240, 3840, 61440];
 	var winningScoresG5L3 = [1057, 2114, 4228, 8456, 16912, 33824, 67648, 135296, 270592, 541184, 1082368, 2164736, 4329472, 8658944, 17317888, 7, 224, 7168, 229376, 7340032, 14, 448, 14336, 458752, 14680064, 28, 896, 28672, 917504, 29360128, 4161, 8322,
 		16644, 133152, 266304, 532608, 4260864, 8521728, 17043456, 1092, 2184, 4368, 34944, 69888, 139776, 2236416, 4472832
 	];
@@ -333,7 +335,7 @@ $(function() {
 			$('#gridSizeSection, #inARowSection')
 			.css({
 				'display' : 'none !important' ,
-			})
+			});
 		} else if (winner !== undefined) { ///check if a winner has been found
 			$('#playerMessage h3').text(winner + " wins!");
 			$('#actionButton')
@@ -355,11 +357,11 @@ $(function() {
 						'border': 'none',
 						'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
 					});
-				// $('.enableClick')
-				//     .css({
-				//         'background-color': '#EF9A9A',
-				//         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
-				//     });
+				$('.enableClick')
+				    .css({
+				        'background-color': '#EF9A9A',
+				        'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+				    });
 				checkWhoWonMatch();
 			} else if (winner === playerTwo[0]) {
 				playerTwo[3]++;
@@ -374,11 +376,11 @@ $(function() {
 						'border': 'none',
 						'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
 					});
-				// $('.enableClick')
-				//     .css({
-				//         'background-color': '#A5D6A7',
-				//         'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
-				//     });
+				$('.enableClick')
+				    .css({
+				        'background-color': '#A5D6A7',
+				        'box-shadow': '0 0 0 0 rgba(0,0,0,0.0)'
+				    });
 				checkWhoWonMatch();
 			}
 			console.log(playerOne[0] + ' score = ' + playerOne[3] + ' - ' + playerTwo[0] + ' score = ' + playerTwo[3]);
